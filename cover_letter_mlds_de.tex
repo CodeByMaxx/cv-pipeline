@@ -1,0 +1,83 @@
+\documentclass[11pt,a4paper]{article}
+\input{settings.tex}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+\begin{document}
+
+% --- HEADER / SENDER ---
+\begin{minipage}[t]{0.55\textwidth}
+    {\Large \bfseries \color{primary} \meinName}\\[0.2em]
+    {\small \color{accent} \bfseries \stellenTitel}
+\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+    \raggedleft \footnotesize \color{textgray}
+    \meineStrasse $\cdot$ \meinOrt, Österreich\\
+    E-Mail: \href{mailto:\meineEmail}{\meineEmail}\\
+    Telefon: \meineTel $\cdot$ \href{\meinLinkedin}{LinkedIn} $\cdot$ \href{\meinGithub}{GitHub}
+\end{minipage}
+
+\vspace{0.8em}
+\color{accent}\hrule height 1pt
+\vspace{1.0em}
+
+% --- RECIPIENT & DATE ---
+\begin{minipage}[t]{0.55\textwidth}
+    \color{primary} \small
+    \textbf{\firmenName} {\\[0.15em]}
+    {\ansprechPartner} {\\[0.15em]}
+    {\firmenStrasse} {\\[0.15em]}
+    {\firmenOrt}
+\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+    \raggedleft \small \color{textgray}
+    St. Pölten, \today
+\end{minipage}
+
+\vspace{1.2em}
+
+% --- BETREFF UND DYNAMISCHER REFERENCE CODE ---
+\vspace{0.8cm}
+{\Large\bfseries\color{primary} Bewerbung als \stellenTitel}
+
+\ifdefempty{\referenzNummer}{%
+  \vspace{0.4cm}% Wenn leer: Nur normaler Abstand
+}{%
+  \vspace{0.1cm}%
+  {\small\color{textgray}\textbf{Referenznummer:} \referenzNummer}\\[0.4cm]%
+}
+
+\vspace{0.6em}
+
+% --- COVER LETTER BODY ---
+\color{primary} \small
+
+\anrede
+
+Die Verbindung von fortgeschrittener mathematischer Modellierung mit produktionsreifen KI-Infrastrukturen erfordert mehr als das bloße Trainieren von Modellen. Es verlangt ein tiefes Verständnis für numerische Verfahren, hardwarebeschleunigte Ausführung und skalierbare Datenarchitekturen für komplexe Datenströme. Mit einem M.Sc. in Scientific Computing und über 9 Jahren Erfahrung in der Software- und ML-Entwicklung bin ich darauf spezialisiert, KI-Konzepte in hochperformante Produktionssysteme zu überführen.
+
+Von eingebetteter GPU-Hardwarebeschleunigung (CUDA/ONNX) bis hin zu cloudnativen RAG-Processing-Backends (Vektordatenbanken, PyTorch, AWS/Azure) bringe ich die technische Tiefe mit, um datengestützte Systeme für \textbf{\firmenName} zu realisieren.
+
+\textbf{Warum mein Profil zu Ihren Anforderungen im Bereich KI \& Data Engineering passt:}
+
+\begin{itemize}[leftmargin=1.2em, itemsep=0.15em, parsep=0pt, topsep=0.2em]
+    \item \textbf{Mathematische \& Wissenschaftliche Basis:} Master-Abschluss der Universität Wien in Scientific Computing mit Spezialisierung auf numerische Algorithmen, numerische lineare Algebra und Datenoptimierung.
+    \item \textbf{Produktionsreife KI- \& RAG-Architekturen:} Praktische Erfahrung in der Entwicklung von Retrieval-Augmented Generation (RAG) Backends in der Cloud, Vektordatenbank-Integrationen und automatisierten PyTorch Deep-Learning-Pipelines.
+    \item \textbf{Hardwarebeschleunigung \& Datensysteme:} Nachweisbare Erfolge bei der Optimierung von Deep-Learning-Modellen via CUDA für Echtzeit-Edge-Verarbeitung sowie bei verteilten Daten-Pipelines (PySpark, DuckDB).
+\end{itemize}
+
+\textbf{\firmenName} sticht für mich besonders durch \textit{\firmenHighlight} hervor. Gerne möchte ich meine Erfahrung in ML-Engineering und GPU-Beschleunigung in Ihr Team einbringen.
+
+Ich freue mich auf die Gelegenheit, mich mit Ihnen in einem persönlichen Gespräch auszutauschen.
+
+\vspace{0.6em}
+
+Mit freundlichen Grüßen
+
+\vspace{1.2em}
+
+\textbf{\meinName}
+
+\end{document}

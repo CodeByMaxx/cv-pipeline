@@ -1,0 +1,83 @@
+\documentclass[11pt,a4paper]{article}
+\input{settings.tex}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+\begin{document}
+
+% --- HEADER / SENDER ---
+\begin{minipage}[t]{0.55\textwidth}
+    {\Large \bfseries \color{primary} \meinName}\\[0.2em]
+    {\small \color{accent} \bfseries \stellenTitel}
+\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+    \raggedleft \footnotesize \color{textgray}
+    \meineStrasse $\cdot$ \meinOrt, Österreich\\
+    E-Mail: \href{mailto:\meineEmail}{\meineEmail}\\
+    Telefon: \meineTel $\cdot$ \href{\meinLinkedin}{LinkedIn} $\cdot$ \href{\meinGithub}{GitHub}
+\end{minipage}
+
+\vspace{0.8em}
+\color{accent}\hrule height 1pt
+\vspace{1.0em}
+
+% --- RECIPIENT & DATE ---
+\begin{minipage}[t]{0.55\textwidth}
+    \color{primary} \small
+    \textbf{\firmenName} {\\[0.15em]}
+    {\ansprechPartner} {\\[0.15em]}
+    {\firmenStrasse} {\\[0.15em]}
+    {\firmenOrt}
+\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+    \raggedleft \small \color{textgray}
+    St. Pölten, \today
+\end{minipage}
+
+\vspace{1.2em}
+
+% --- BETREFF UND DYNAMISCHER REFERENCE CODE ---
+\vspace{0.8cm}
+{\Large\bfseries\color{primary} Bewerbung als \stellenTitel}
+
+\ifdefempty{\referenzNummer}{%
+  \vspace{0.4cm}% Wenn leer: Nur normaler Abstand
+}{%
+  \vspace{0.1cm}%
+  {\small\color{textgray}\textbf{Referenznummer:} \referenzNummer}\\[0.4cm]%
+}
+
+\vspace{0.6em}
+
+% --- COVER LETTER BODY ---
+\color{primary} \small
+
+\anrede
+
+Wenn hochverfügbare Enterprise-Systeme an Leistungsgrenzen stoßen, Speicherlecks die Stabilität gefährden oder komplexe Legacy-Codebasen eine tiefgreifende Architektur-Refaktorierung erfordern, reicht reine Feature-Entwicklung nicht mehr aus. Gefragt ist eine Systemarchitektur, die auf geringe Latenz, Determinismus und maximale Ausführungssicherheit ausgelegt ist. Genau an dieser Schnittstelle – der Kombination aus systemnaher Softwareentwicklung, mathematischer Präzision und modernen C++/Python-Backends – bringe ich meine Expertise ein.
+
+Mit einem Master of Science in Scientific Computing und über 9 Jahren Praxiserfahrung in den Bereichen Enterprise Search Engines, Kern-Desktop-Anwendungen und eingebettete Echtzeitsysteme verfüge ich über die technische Tiefe, um hochperformante Kernsysteme für \textbf{\firmenName} zu entwickeln.
+
+\textbf{Warum mein Profil perfekt zu Ihren Anforderungen passt:}
+
+\begin{itemize}[leftmargin=1.2em, itemsep=0.15em, parsep=0pt, topsep=0.2em]
+    \item \textbf{Kernsysteme \& Systemnahe Entwicklung:} Mit umfassenden Kenntnissen in modernem C++ (17/20), C, Python und CUDA optimiere ich speicher- und latenzkritische Backends. Die Ursachenanalyse von Memory Leaks, Race Conditions und System-Engpässen gehört zu meiner täglichen Praxis.
+    \item \textbf{Hochperformante Enterprise-Backends:} Bei Mindbreeze, Untis und EYYES habe ich Kernmodule von Suchmaschinen refaktoriert, Indizierungs-Pipelines optimiert und kritische technische Schulden in Produktions-Backends nachhaltig abgebaut.
+    \item \textbf{Messbare Prozessoptimierung:} Durch die Entwicklung automatisierter Performance-Test-Frameworks konnte ich den Zeitaufwand für Release-Verifizierungen von 10 Arbeitstagen auf 3 Arbeitstage reduzieren.
+\end{itemize}
+
+\textbf{\firmenName} überzeugt mich besonders durch \textit{\firmenHighlight}. Gerne möchte ich meine hands-on Problemlösungskompetenz in Ihr Entwicklerteam einbringen, um komplexe Systeme nachhaltig zu skalieren.
+
+Ich freue mich über die Gelegenheit, Ihre technischen Anforderungen in einem persönlichen Gespräch zu vertiefen.
+
+\vspace{0.6em}
+
+Mit freundlichen Grüßen
+
+\vspace{1.2em}
+
+\textbf{\meinName}
+
+\end{document}

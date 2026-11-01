@@ -1,0 +1,19 @@
+# Environment & Secrets
+.env
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# LaTeX Build Files
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.toc
+*.out
+
+# Generated Outputs & Trackers
+output/
+applications.csv

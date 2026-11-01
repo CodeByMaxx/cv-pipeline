@@ -1,0 +1,152 @@
+\documentclass[10pt,a4paper]{article}
+
+\newcommand{\cvRolle}{Senior C++/Python Backend \& Systems Engineer}
+\newcommand{\cvSubheader}{High-Performance Architectures $\cdot$ Pragmatic Problem Solver $\cdot$ Domain Expert}
+
+\input{settings.tex}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\setlength{\parindent}{0pt}
+\setlist[itemize]{leftmargin=1.5em, itemsep=0.15em, topsep=0.15em}
+
+\cvHeader
+
+\cvsection{Professional Profile}
+
+% --- BILD LINKS, TEXT RECHTS UNTER DER ÜBERSCHRIFT ---
+\begin{minipage}[t]{0.22\textwidth}
+    \vspace{0pt}
+    \includegraphics[width=\linewidth, keepaspectratio]{profil.jpeg}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.75\textwidth}
+    \vspace{0pt}
+    Pragmatic Senior C++/Python Backend \& Systems Engineer with 9+ years of experience building real-time pipelines, cloud microservices, and high-throughput systems. Holds an M.Sc. in Scientific Computing with a strong mathematical foundation.\\\\[0.1cm]
+    Resilient problem solver resolving critical production bottlenecks and memory leaks. Acts as an effective interface between development, QA, and architecture while leveraging modern AI tooling (Cursor, Copilot).
+\end{minipage}
+
+\vspace{0.3cm}
+
+\cvsection{Engineering Profile}
+
+\colorbox{primary!10}{%
+\parbox{\dimexpr\textwidth-2\fboxsep\relax}{%
+    \vspace{0.10cm}
+    \centering
+    {\bfseries\color{primary} TECHNICAL FOUNDATION \& SYSTEM DOMAINS\par}
+    \vspace{0.08cm}
+
+    \begin{minipage}[t]{0.31\linewidth}
+        \raggedright
+        \textbf{\color{primary}Core Systems Engineering}\par
+        Modern C++, C, Python, Bash\\
+        Low-Level Memory \& Refactoring\\
+        Multithreading \& Deterministic Systems
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.31\linewidth}
+        \raggedright
+        \textbf{\color{primary}Platform \& Infrastructure}\par
+        AWS (S3, RDS, EC2) \& Azure\\
+        Linux Ecosystem \& Docker\\
+        GitLab CI/CD \& Automated Test Pipelines
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.31\linewidth}
+        \raggedright
+        \textbf{\color{primary}AI, Data \& High-Throughput}\par
+        RAG Infrastructure \& Vector DBs\\
+        Distributed Data Processing \& REST APIs\\
+        CUDA Hardware Acceleration \& Edge GPU
+    \end{minipage}
+
+    \vspace{0.08cm}
+}%
+}
+
+\vspace{0.20cm}
+\textbf{\color{primary}CORE TECHNICAL SPECIALIZATION -- SYSTEMS ENGINEERING}
+\begin{itemize}
+    \item \textbf{High-Performance Backend Architecture:} Modern C++ system design, cache-friendly data structures, and low-latency execution in resource-critical backends.
+    \item \textbf{System Profiling \& Memory Debugging:} Root-cause analysis of memory leaks, race conditions, and latency spikes to maximize system uptime and runtime efficiency.
+    \item \textbf{Data Pipelines & Integration Infrastructure:} Architecting high-throughput data processing and integration pipelines while automating performance verification for faster release cycles.
+\end{itemize}
+
+\cvsection{Professional Experience}
+
+\textbf{Mindbreeze GmbH -- Software / Quality Engineer (C++/Python)} \daterange{09/2022}{07/2026}\\
+\textit{C++, Python, REST APIs, Linux, Docker, Azure DevOps, Telemetry \& Performance Profiling \quad|\quad Team: 6 Engineers}
+\begin{itemize}
+    \item Engineered Python/Bash automation frameworks, reducing release verification duration from 10 working days down to 3 working days.
+    \item Optimized performance-critical backend components for enterprise architectures handling distributed data processing.
+    \item Refactored search engine core modules and optimized index data pipelines to improve high-throughput query execution.
+    \item Primary technical troubleshooter during release phases, resolving memory leaks and performance degradations in live systems.
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{Untis GmbH -- Software Engineer (C++)} \daterange{02/2022}{06/2022}\\
+\textit{C++, System Refactoring, Performance Profiling, Core Desktop Modules \quad|\quad Team: 10 Engineers}
+\begin{itemize}
+    \item Refactored legacy C++/MFC core modules using Visual Studio to eliminate technical debt, optimize memory allocation, and resolve production crashes.
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{logi.cals -- Embedded Software Engineer (C/C++)} \daterange{02/2021}{01/2022}\\
+\textit{C, C++, Embedded Systems, Safety-Critical Architectures, Deterministic Execution \quad|\quad Team: 6 Engineers}
+\begin{itemize}
+    \item Engineered deterministic C/C++ runtime execution systems (Software PLCs) and automated verification test suites for safety-standard certification across hardware platforms.
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{EYYES -- Software Engineer (C++/Python)} \daterange{04/2017}{12/2020}\\
+\textit{C++, Python, Real-Time Execution Pipelines, CUDA, Embedded GPU Edge \quad|\quad Team: 8 Engineers}
+\begin{itemize}
+    \item Developed computer vision and deep learning pipelines (Keras, ONNX) for industrial and embedded camera systems to ensure continuous real-time edge performance.
+    \item Engineered low-latency C++ and CUDA execution routines for real-time video stream processing on embedded GPU edge devices.
+    \item Implemented hardware-near software components in C++ to control camera sensors, stepper motors, and SerDes interfaces.
+    \item Optimized detection accuracy and recognition precision by training multiple TensorFlow classifiers to 99.99\% accuracy through rigorous hardware-near algorithm tuning and automated benchmarking suites.
+\end{itemize}
+
+\cvsection{Selected Software Projects}
+
+\begin{itemize}
+    \item \textbf{Magnum C++ Game of Life:} High-performance C++ simulation focusing on memory layout and OO design (\href{\meinGithub}{GitHub}).\\
+    \textit{Tech: Modern C++, Memory Layout, Optimization, Grid Logic}
+    \item \textbf{AWS Cloud Deep Learning Pipeline:} MLOps pipeline with automated ingestion and PyTorch inference (\href{\meinGithub}{GitHub}).\\
+    \textit{Tech: AWS, Python, PyTorch, MLOps}
+    \item \textbf{Azure AI Document Analyzer \& RAG Infra:} RAG processing backend deployed on Azure with vector databases (\href{\meinGithub}{GitHub}).\\
+    \textit{Tech: Python, RAG, Vector DBs, REST APIs}
+\end{itemize}
+
+\cvsection{Technical Skills}
+
+\textbf{Languages \& Core:} Modern C++, C, Python, SQL, Java, Bash, Low-Level Memory Management, Parallel Algorithms, Scientific Computing.\\[0.05em]
+\textbf{ML, AI \& Data Engineering:} PyTorch, TensorFlow, Keras, ONNX, RAG Infrastructure, LangChain, LangGraph, PySpark, DuckDB, PostgreSQL, SQLAlchemy, Apache Superset.\\[0.05em]
+\textbf{Cloud, Systems \& Infra:} Amazon AWS (S3, RDS, EC2), Microsoft Azure, Linux (Ubuntu/Debian), Windows, Docker, Microservices, REST APIs.\\[0.05em]
+\textbf{DevOps, QA \& Tooling:} GitLab CI/CD, GitHub Actions, Azure DevOps, Git, Telemetry, Cursor, GitHub Copilot, CUDA, OpenCL, OpenMP, MPI, Embedded GPU Edge.
+
+\cvsection{Education}
+
+\textbf{M.Sc. Scientific Computing} -- University of Vienna \daterange{10/2013}{06/2017}\\
+\textit{Thesis: Silent Data Corruption in FT-GMRES (\href{https://utheses.univie.ac.at/detail/40917/}{Link}, Advisor: Prof. Dr. W. Gansterer).}
+
+\vspace{0.1cm}
+\textbf{B.Sc. Industrial Simulation} -- FH St. Pölten \daterange{09/2010}{06/2013}\\
+\textit{Thesis: Simulation of Nanocomposite Materials (\href{\meinGithub}{Link}, Advisor: Prof. Dr. T. Schrefl).}
+
+\cvsection{Engineering Approach \& Mindset}
+
+\begin{itemize}
+    \item \textbf{Systematic Problem Solving:} First-principles analytical approach to systematic debugging and stability optimization.
+    \item \textbf{Quality & Efficiency Focus:} Pragmatic engineering mindset balancing rapid deployment with long-term maintainability and high performance.
+    \item \textbf{Cross-Functional Integration:} Acts as the technical glue bridging development, QA, and architecture.
+\end{itemize}
+
+\cvsection{Languages & Work Status}
+
+\textbf{German:} Native (C2) \quad$\cdot$\quad \textbf{English:} Full Professional Proficiency (C1/C2) \quad$\cdot$\quad \textbf{Work Permit:} EU Citizen / Austria
+
+\end{document}

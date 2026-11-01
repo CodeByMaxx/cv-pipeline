@@ -1,0 +1,83 @@
+\documentclass[11pt,a4paper]{article}
+\input{settings.tex}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+\begin{document}
+
+% --- HEADER / SENDER ---
+\begin{minipage}[t]{0.55\textwidth}
+    {\Large \bfseries \color{primary} \meinName}\\[0.2em]
+    {\small \color{accent} \bfseries \stellenTitel}
+\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+    \raggedleft \footnotesize \color{textgray}
+    \meineStrasse $\cdot$ \meinOrt, Austria\\
+    Email: \href{mailto:\meineEmail}{\meineEmail}\\
+    Phone: \meineTel $\cdot$ \href{\meinLinkedin}{LinkedIn} $\cdot$ \href{\meinGithub}{GitHub}
+\end{minipage}
+
+\vspace{0.8em}
+\color{accent}\hrule height 1pt
+\vspace{1.0em}
+
+% --- RECIPIENT & DATE ---
+\begin{minipage}[t]{0.55\textwidth}
+    \color{primary} \small
+    \textbf{\firmenName} {\\[0.15em]}
+    {\ansprechPartner} {\\[0.15em]}
+    {\firmenStrasse} {\\[0.15em]}
+    {\firmenOrt}
+\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+    \raggedleft \small \color{textgray}
+    St. Pölten, \today
+\end{minipage}
+
+\vspace{1.2em}
+
+% --- BETREFF UND DYNAMISCHER REFERENCE CODE ---
+\vspace{0.8cm}
+{\Large\bfseries\color{primary} Application for \stellenTitel}
+
+\ifdefempty{\referenzNummer}{%
+  \vspace{0.4cm}% Wenn leer: Nur normaler Abstand
+}{%
+  \vspace{0.1cm}%
+  {\small\color{textgray}\textbf{Reference Code:} \referenzNummer}\\[0.4cm]%
+}
+
+\vspace{0.6em}
+
+% --- COVER LETTER BODY ---
+\color{primary} \small
+
+\anrede
+
+Bridging advanced mathematical modeling with high-throughput, production-grade AI infrastructure requires more than basic model training. It demands deep numerical understanding, hardware-accelerated execution, and scalable data architectures capable of handling complex enterprise data flows. Combining an M.Sc. in Scientific Computing with over 9 years of software and ML engineering experience, I specialize in transitioning AI concepts into high-performance production systems.
+
+From embedded GPU hardware acceleration (CUDA/ONNX) to cloud-native RAG processing backends (Vector DBs, PyTorch, AWS/Azure), I bring the technical depth required to power data-driven intelligence for \textbf{\firmenName}.
+
+\textbf{Why my expertise fits your AI \& Data Engineering role:}
+
+\begin{itemize}[leftmargin=1.2em, itemsep=0.15em, parsep=0pt, topsep=0.2em]
+    \item \textbf{Mathematical \& Scientific Foundation:} Master's degree from the University of Vienna in Scientific Computing, providing advanced expertise in numerical algorithms, numerical linear algebra, and data optimization.
+    \item \textbf{Production AI \& RAG Architectures:} Practical experience designing cloud-deployed Retrieval-Augmented Generation (RAG) backends, vector database integrations, and automated PyTorch deep learning pipelines.
+    \item \textbf{Hardware Acceleration \& Data Systems:} Proven track record optimizing deep learning models via CUDA for real-time edge processing alongside distributed data pipelines (PySpark, DuckDB).
+\end{itemize}
+
+\textbf{\firmenName} stands out to me due to \textit{\firmenHighlight}. I am eager to bring my background in ML engineering and GPU acceleration to your team.
+
+I look forward to discussing how my experience aligns with your team's goals in an interview.
+
+\vspace{0.6em}
+
+Sincerely,
+
+\vspace{1.2em}
+
+\textbf{\meinName}
+
+\end{document}

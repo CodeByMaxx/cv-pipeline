@@ -1,0 +1,83 @@
+\documentclass[11pt,a4paper]{article}
+\input{settings.tex}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+\begin{document}
+
+% --- HEADER / SENDER ---
+\begin{minipage}[t]{0.55\textwidth}
+    {\Large \bfseries \color{primary} \meinName}\\[0.2em]
+    {\small \color{accent} \bfseries \stellenTitel}
+\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+    \raggedleft \footnotesize \color{textgray}
+    \meineStrasse $\cdot$ \meinOrt, Austria\\
+    Email: \href{mailto:\meineEmail}{\meineEmail}\\
+    Phone: \meineTel $\cdot$ \href{\meinLinkedin}{LinkedIn} $\cdot$ \href{\meinGithub}{GitHub}
+\end{minipage}
+
+\vspace{0.8em}
+\color{accent}\hrule height 1pt
+\vspace{1.0em}
+
+% --- RECIPIENT & DATE ---
+\begin{minipage}[t]{0.55\textwidth}
+    \color{primary} \small
+    \textbf{\firmenName} {\\[0.15em]}
+    {\ansprechPartner} {\\[0.15em]}
+    {\firmenStrasse} {\\[0.15em]}
+    {\firmenOrt}
+\end{minipage}
+\begin{minipage}[t]{0.45\textwidth}
+    \raggedleft \small \color{textgray}
+    St. Pölten, \today
+\end{minipage}
+
+\vspace{1.2em}
+
+% --- BETREFF UND DYNAMISCHER REFERENCE CODE ---
+\vspace{0.8cm}
+{\Large\bfseries\color{primary} Application for \stellenTitel}
+
+\ifdefempty{\referenzNummer}{%
+  \vspace{0.4cm}% Wenn leer: Nur normaler Abstand
+}{%
+  \vspace{0.1cm}%
+  {\small\color{textgray}\textbf{Reference Code:} \referenzNummer}\\[0.4cm]%
+}
+
+\vspace{0.6em}
+
+% --- COVER LETTER BODY ---
+\color{primary} \small
+
+\anrede
+
+Modern software delivery relies on more than just code execution—it demands reliable CI/CD pipelines, automated testing infrastructure, and containerized cloud platforms that accelerate release cycles without sacrificing system stability. Having spent over 9 years at the intersection of software development, release verification, and cloud infrastructure, I build platforms that bridge development teams and operations smoothly.
+
+With a strong foundation in Linux systems, Docker containerization, cloud environments (AWS/Azure), and CI/CD automation, I bring a proven capability to streamline release infrastructure for \textbf{\firmenName}.
+
+\textbf{Why my background aligns with your platform engineering needs:}
+
+\begin{itemize}[leftmargin=1.2em, itemsep=0.15em, parsep=0pt, topsep=0.2em]
+    \item \textbf{Proven Release Cycle Reduction:} At Mindbreeze, I engineered automated Python/Bash test frameworks integrated into GitLab CI/CD and Azure DevOps, cutting release verification duration by 70\% (from 10 working days to 3 working days).
+    \item \textbf{Containerized Infrastructure \& Telemetry:} I build and manage containerized microservice environments (Docker, Linux) while deploying telemetry routines to maintain uptime and performance visibility.
+    \item \textbf{Developer Experience (DevEx):} Having an extensive C++/Python backend engineering background allows me to understand developer workflows deeply, eliminating delivery friction and build bottlenecks.
+\end{itemize}
+
+\textbf{\firmenName} particularly impresses me with \textit{\firmenHighlight}. I look forward to contributing my automation experience to scale your deployment infrastructure.
+
+I welcome the opportunity to discuss your platform and DevOps vision in a personal interview.
+
+\vspace{0.6em}
+
+Sincerely,
+
+\vspace{1.2em}
+
+\textbf{\meinName}
+
+\end{document}

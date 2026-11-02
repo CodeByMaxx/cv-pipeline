@@ -259,6 +259,8 @@ SETTINGS_TEMPLATE = r"""% ==========================================
 \usepackage{charter}
 \usepackage{microtype}
 \usepackage{etoolbox}
+\usepackage{ifthen}
+\usepackage{pdftexcmds}
 
 % --- DESIGN FARBEN ---
 \definecolor{primary}{RGB}{15, 23, 42}      % Deep Slate / Tech Dark
@@ -307,9 +309,9 @@ SETTINGS_TEMPLATE = r"""% ==========================================
 \newcommand{\cvHeader}{%
 \begin{center}
     {\Huge\bfseries\color{primary} \meinName}\\[0.1cm]
-    {\large\bfseries \cvRolle}\\[0.05cm]
-    {\color{accent}\textbf{\cvSubheader}}\\[0.1cm]
-    {\small \meinOrt, __COUNTRY__ \quad$\cdot$\quad \meineTel \quad$\cdot$\quad \href{mailto:\meineEmail}{\meineEmail} \quad$\cdot$\quad \href{\meinLinkedin}{LinkedIn} \quad$\cdot$\quad \href{\meinGithub}{GitHub}}
+    {\LARGE\bfseries \cvRolle}\\[0.05cm]
+    {\color{primary}\textbf{\cvSubheader}}\\[0.1cm]
+    {\small \meinOrt, __COUNTRY__ \quad\textperiodcentered\quad \meineTel \quad\textperiodcentered\quad \href{mailto:\meineEmail}{\meineEmail} \quad\textperiodcentered\quad \href{\meinLinkedin}{LinkedIn} \quad\textperiodcentered\quad \href{\meinGithub}{GitHub}}
 \end{center}
 \vspace{0.1cm}
 }
@@ -324,13 +326,21 @@ SETTINGS_TEMPLATE = r"""% ==========================================
 
 \newcommand{\daterange}[2]{\hfill{\small #1 -- #2}}
 
-% --- ENGINEERING APPROACH & MINDSET DEFINITION ---
+% --- ENGINEERING APPROACH & MINDSET DEFINITION (SPRACHABHÄNGIG) ---
 \newcommand{\engineeringApproach}{%
-    \cvsection{Engineering Approach \& Mindset}%
+    \cvsection{\ifnum\pdfstrcmp{\languagename}{ngerman}=0 Arbeitsweise \& Mindset\else Engineering Approach \& Mindset\fi}%
     \begin{itemize}[leftmargin=*, itemsep=2pt]%
-        \item \textbf{Systematic Problem Solving:} First-principles analytical approach to systematic debugging and stability optimization.%
-        \item \textbf{Quality & Efficiency Focus:} Pragmatic engineering mindset balancing rapid deployment with long-term maintainability and high performance.%
-        \item \textbf{Cross-Functional Integration:} Acts as the technical glue bridging development, QA, and architecture.%
+        \ifnum\pdfstrcmp{\languagename}{ngerman}=0
+            % --- DEUTSCHE VERSION ---
+            \item \textbf{Systematisches Problemlösen:} Analytischer First-Principles-Ansatz für systematisches Debugging und Stabilitätsoptimierung.%
+            \item \textbf{Fokus auf Qualität \& Effizienz:} Pragmatisches Engineering-Mindset, das schnelles Deployment mit langfristiger Wartbarkeit und hoher Performance verbindet.%
+            \item \textbf{Funktionsübergreifende Integration:} Fungiert als technisches Bindeglied zwischen Entwicklung, QA und Architektur.%
+        \else
+            % --- ENGLISCHE VERSION ---
+            \item \textbf{Systematic Problem Solving:} First-principles analytical approach to systematic debugging and stability optimization.%
+            \item \textbf{Quality \& Efficiency Focus:} Pragmatic engineering mindset balancing rapid deployment with long-term maintainability and high performance.%
+            \item \textbf{Cross-Functional Integration:} Acts as the technical glue bridging development, QA, and architecture.%
+        \fi
     \end{itemize}%
 }
 
@@ -345,21 +355,52 @@ SETTINGS_TEMPLATE = r"""% ==========================================
 """
 
 
+def escape_latex(text: str) -> str:
+    """Maskiert LaTeX-Sonderzeichen in Dynamik-Strings."""
+    if not text:
+        return ""
+    # Erst Backslashes, dann Sonderzeichen
+    chars = {
+        "&": r"\&",
+        "%": r"\%",
+        "$": r"\$",
+        "#": r"\#",
+        "_": r"\_",
+        "{": r"\{",
+        "}": r"\}",
+        "~": r"\textasciitilde{}",
+        "^": r"\textasciicircum{}",
+    }
+    pattern = re.compile(
+        "|".join(
+            re.escape(key) for key in sorted(chars.keys(), key=lambda item: -len(item))
+        )
+    )
+    return pattern.sub(lambda match: chars[match.group(0)], text)
+
+
 def render_settings(meta: JobMetadata, lang: str) -> str:
-    babel_lang = "ngerman" if lang == "de" else "american"
-    country = "Österreich" if lang == "de" else "Austria"
+    babel_lang = (
+        "ngerman" if lang.lower() in ["de", "deutsch", "german"] else "american"
+    )
+    country = "Österreich" if lang.lower() in ["de", "deutsch", "german"] else "Austria"
+
+    # Bereinige das Kerning bei Trennzeichen im Subheader
+    clean_subheader = re.sub(
+        r"\\cdot|·", r"\\quad\\textperiodcentered\\quad", meta.cv_subheader
+    )
 
     return (
         SETTINGS_TEMPLATE.replace("__BABEL_LANG__", babel_lang)
         .replace("__COUNTRY__", country)
-        .replace("__CV_ROLLE__", meta.cv_rolle)
-        .replace("__CV_SUBHEADER__", meta.cv_subheader)
-        .replace("__COMPANY_NAME__", meta.company_name)
-        .replace("__CONTACT_PERSON__", meta.contact_person)
-        .replace("__LOCATION__", meta.location)
-        .replace("__JOB_TITLE__", meta.job_title)
-        .replace("__SALUTATION__", meta.salutation)
-        .replace("__COMPANY_HIGHLIGHT__", meta.company_highlight)
+        .replace("__CV_ROLLE__", escape_latex(meta.cv_rolle))
+        .replace("__CV_SUBHEADER__", clean_subheader)
+        .replace("__COMPANY_NAME__", escape_latex(meta.company_name))
+        .replace("__CONTACT_PERSON__", escape_latex(meta.contact_person))
+        .replace("__LOCATION__", escape_latex(meta.location))
+        .replace("__JOB_TITLE__", escape_latex(meta.job_title))
+        .replace("__SALUTATION__", escape_latex(meta.salutation))
+        .replace("__COMPANY_HIGHLIGHT__", escape_latex(meta.company_highlight))
     )
 
 
@@ -391,15 +432,22 @@ def resolve_file_variants(meta: JobMetadata, lang_setting: str) -> tuple[str, st
     cv_file = get_variant_filename(meta.cv_variant)
     cl_file = get_variant_filename(meta.cover_letter_variant)
 
-    print(f"[*] Sprachmodus gewählt: '{target_lang.upper()}'")
-    print(f"[*] Template Lebenslauf: {cv_file}")
-    print(f"[*] Template Anschreiben: {cl_file}")
-
     return target_lang, cv_file, cl_file
 
 
 # ==========================================
-# 5. CSV TRACKING
+# 5. CLEANUP HELPER
+# ==========================================
+def cleanup_target_dir(target_dir: Path):
+    """Löscht alle temporären Dateien aus dem Zielverzeichnis, behält nur .pdf und .log."""
+    for temp_file in target_dir.glob("*"):
+        if temp_file.is_file():
+            if temp_file.suffix.lower() not in [".pdf", ".log"]:
+                temp_file.unlink()
+
+
+# ==========================================
+# 6. CSV TRACKING
 # ==========================================
 CSV_FILE = "applications.csv"
 CSV_HEADERS = [
@@ -447,8 +495,13 @@ def append_to_csv(meta: JobMetadata, source: str, used_model: str, resolved_lang
     print(f"[✓] Application logged to {CSV_FILE} (Model: {used_model})")
 
 
+def sanitize_name(name: str) -> str:
+    clean = re.sub(r"[^\w\s-]", "", name).strip().replace(" ", "_")
+    return re.sub(r"[-_]+", "_", clean)
+
+
 # ==========================================
-# 6. PIPELINE & CONFIGURABLE CASCADE
+# 7. PIPELINE & CONFIGURABLE CASCADE
 # ==========================================
 DEFAULT_CASCADE_ORDER = ["gemini", "aws", "azure", "ollama"]
 
@@ -531,13 +584,6 @@ def run_pipeline(
         subprocess.run(cv_cmd, check=True)
     except subprocess.CalledProcessError as e:
         print(f"[!] Fehler beim Kompilieren des CV ({cv_file}): {e}")
-        log_path = target_dir / f"{Path(cv_file).stem}.log"
-        if log_path.exists():
-            print(f"\n--- LOG-DATEI CV ({log_path}) ---")
-            for line in log_path.read_text(
-                encoding="utf-8", errors="ignore"
-            ).splitlines()[-30:]:
-                print(line)
 
     # 2. Anschreiben separat kompilieren
     try:
@@ -551,21 +597,12 @@ def run_pipeline(
         ]
         print(f"[*] Compiling Cover Letter ({cl_file})...")
         subprocess.run(cl_cmd, check=True)
-        print(f"[✓] PDFs erfolgreich verarbeitet unter: {target_dir}")
     except subprocess.CalledProcessError as e:
         print(f"[!] Fehler beim Kompilieren des Anschreibens ({cl_file}): {e}")
-        log_path = target_dir / f"{Path(cl_file).stem}.log"
-        if log_path.exists():
-            print(f"\n--- LOG-DATEI ANSCHREIBEN ({log_path}) ---")
-            for line in log_path.read_text(
-                encoding="utf-8", errors="ignore"
-            ).splitlines()[-30:]:
-                print(line)
 
-
-def sanitize_name(name: str) -> str:
-    clean = re.sub(r"[^\w\s-]", "", name).strip().replace(" ", "_")
-    return re.sub(r"[-_]+", "_", clean)
+    # Bereinigungs-Schritt: Nur .pdf und .log im Ausgabeordner behalten
+    cleanup_target_dir(target_dir)
+    print(f"[✓] PDFs und Log-Dateien erfolgreich verarbeitet unter: {target_dir}")
 
 
 if __name__ == "__main__":
@@ -597,8 +634,126 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if not args.source:
-        print("Fehler: Bitte gib eine URL oder Datei an.")
-        sys.exit(1)
+        print(
+            "[*] Kein Quellpfad angegeben. Starte lokalen Offline-Modus für ALLE Sprach- und Rollen-Varianten..."
+        )
+
+        variants = [
+            {
+                "cv_file": "cv_backend.tex",
+                "cl_file": "cover_letter_backend.tex",
+                "rolle": r"Senior C++/Python Backend \& Systems Engineer",
+                "subheader": r"High-Performance Architectures · Pragmatic Problem Solver · Domain Expert",
+            },
+            {
+                "cv_file": "cv_devops.tex",
+                "cl_file": "cover_letter_devops.tex",
+                "rolle": r"Senior Cloud Infrastructure \& DevOps Engineer",
+                "subheader": r"CI/CD Automation · Release Optimization · Platform Engineering Specialist",
+            },
+            {
+                "cv_file": "cv_mlds.tex",
+                "cl_file": "cover_letter_mlds.tex",
+                "rolle": r"Senior Machine Learning Engineer \& Data Scientist",
+                "subheader": r"AI Infrastructure · RAG Pipelines · Scientific Computing Specialist",
+            },
+        ]
+
+        target_dir = Path("output") / "Lokale_Rollen_Laeufe"
+        target_dir.mkdir(parents=True, exist_ok=True)
+
+        # Schleife über alle Sprachen ('de' und 'en') und Varianten
+        languages_to_run = ["de", "en"] if args.lang == "auto" else [args.lang]
+
+        for current_lang in languages_to_run:
+            for v in variants:
+                salutation = (
+                    "Sehr geehrte Damen und Herren,"
+                    if current_lang == "de"
+                    else "Dear Recruiting Team,"
+                )
+                highlight = (
+                    "Lokale Kompilierung mit optimiertem Tech-Stack."
+                    if current_lang == "de"
+                    else "Local compilation with optimized tech stack."
+                )
+
+                meta = JobMetadata(
+                    company_name="Lokaler_Testlauf",
+                    company_size="N/A",
+                    contact_person="Recruiting Team",
+                    job_title=v["rolle"],
+                    location="Österreich",
+                    language="Deutsch" if current_lang == "de" else "Englisch",
+                    cv_variant=v["cv_file"],
+                    cover_letter_variant=v["cl_file"],
+                    cv_rolle=v["rolle"],
+                    cv_subheader=v["subheader"],
+                    salutation=salutation,
+                    company_highlight=highlight,
+                )
+
+                resolved_lang, cv_file, cl_file = resolve_file_variants(
+                    meta, current_lang
+                )
+
+                print(
+                    f"\n[*] Generiere lokalen Lauf [{current_lang.upper()}] für: {v['rolle']}"
+                )
+
+                # settings.tex schreiben
+                settings_content = render_settings(meta, resolved_lang)
+                Path("settings.tex").write_text(settings_content, encoding="utf-8")
+
+                sub_dir = (
+                    target_dir
+                    / f"{sanitize_name(v['cv_file'].replace('.tex', ''))}_{current_lang}"
+                )
+                sub_dir.mkdir(parents=True, exist_ok=True)
+
+                # 1. CV kompilieren
+                if Path(cv_file).exists():
+                    try:
+                        cv_cmd = [
+                            "latexmk",
+                            "-pdf",
+                            "-f",
+                            "-interaction=nonstopmode",
+                            f"-output-directory={sub_dir}",
+                            cv_file,
+                        ]
+                        print(f"[*] Kompiliere CV ({cv_file})...")
+                        subprocess.run(cv_cmd, check=True)
+                        print(f"[✓] Erfolgreich: {cv_file} -> {sub_dir}")
+                    except subprocess.CalledProcessError as e:
+                        print(f"[!] Fehler beim Kompilieren von {cv_file}: {e}")
+                else:
+                    print(f"[!] Datei {cv_file} nicht gefunden, überspringe...")
+
+                # 2. Anschreiben kompilieren
+                if Path(cl_file).exists():
+                    try:
+                        cl_cmd = [
+                            "latexmk",
+                            "-pdf",
+                            "-f",
+                            "-interaction=nonstopmode",
+                            f"-output-directory={sub_dir}",
+                            cl_file,
+                        ]
+                        print(f"[*] Kompiliere Anschreiben ({cl_file})...")
+                        subprocess.run(cl_cmd, check=True)
+                        print(f"[✓] Erfolgreich: {cl_file} -> {sub_dir}")
+                    except subprocess.CalledProcessError as e:
+                        print(f"[!] Fehler beim Kompilieren von {cl_file}: {e}")
+
+                # Bereinigung: Nur .pdf und .log behalten
+                cleanup_target_dir(sub_dir)
+
+        print(
+            f"\n[✓] Alle Offline-Läufe (DE/EN) abgeschlossen. Ausgabeordner: {target_dir}"
+        )
+        sys.exit(0)
 
     order = args.cascade
     if args.provider != "cascade":

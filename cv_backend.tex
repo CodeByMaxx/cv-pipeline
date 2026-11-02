@@ -36,44 +36,55 @@
 \parbox{\dimexpr\textwidth-2\fboxsep\relax}{%
     \vspace{0.10cm}
     \centering
-    {\bfseries\color{primary} TECHNICAL FOUNDATION \& SYSTEM DOMAINS\par}
+    {\bfseries\color{primary} TECHNICAL FOUNDATION \& SYSTEM ARCHITECTURE DOMAINS\par}
     \vspace{0.08cm}
 
     \begin{minipage}[t]{0.31\linewidth}
         \raggedright
-        \textbf{\color{primary}Core Systems Engineering}\par
-        Modern C++, C, Python, Bash\\
-        Low-Level Memory \& Refactoring\\
-        Multithreading \& Deterministic Systems
+        \textbf{\color{primary}Backend Architecture}\par
+        Modern C++ (11/14/17/20), Python\\
+        REST APIs \& Microservices\\
+        Multithreading \& Concurrency
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.31\linewidth}
         \raggedright
-        \textbf{\color{primary}Platform \& Architecture}\par
-        AWS (S3, RDS, EC2) \& Azure\\
-        Linux Ecosystem \& Docker\\
-        Technical Governance \& Code Reviews
+        \textbf{\color{primary}Systems \& Profiling}\par
+        Memory Optimization \& Profiling\\
+        Linux Systems \& Scripting\\
+        Safety-Critical Systems (C)
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.31\linewidth}
         \raggedright
-        \textbf{\color{primary}Data \& High-Throughput}\par
-        Distributed Data Pipelines \& APIs\\
-        High-Performance Query Engines\\
-        RAG Infrastructure \& Vector DBs
+        \textbf{\color{primary}Data \& Verification}\par
+        PostgreSQL, DuckDB, Redis\\
+        Automated Benchmarking Suites\\
+        CI/CD \& Docker Pipelines
     \end{minipage}
 
     \vspace{0.08cm}
 }%
 }
 
-\vspace{0.20cm}
-\textbf{\color{primary}CORE TECHNICAL SPECIALIZATION -- SYSTEMS ENGINEERING}
-\begin{itemize}
-    \item \textbf{High-Performance Backend Architecture:} Modern C++ system design, cache-friendly data structures, and low-latency execution in resource-critical backends.
-    \item \textbf{System Profiling \& Memory Debugging:} Root-cause analysis of memory leaks, race conditions, and latency spikes to maximize system uptime and runtime efficiency.
-    \item \textbf{Data Pipelines \& Integration Infrastructure:} Architecting high-throughput data processing and integration pipelines while automating performance verification for faster release cycles.
-\end{itemize}
+\vspace{0.15cm}
+
+{\centering
+\colorbox{accent!25}{%
+\parbox{\dimexpr\textwidth-25\fboxsep\relax}{%
+    \vspace{0.08cm}
+    \centering
+    {\bfseries\color{primary}CORE TECHNICAL SPECIALIZATION -- BACKEND \& DISTRIBUTED SYSTEMS\par}
+    \vspace{0.05cm}
+    \raggedright
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.15em, topsep=0.15em]
+        \item \textbf{\color{primary}High-Performance Backend Engineering:} Architecting low-latency microservices, REST APIs, and scalable C++/Python execution engines.
+        \item \textbf{\color{primary}Distributed Data Pipelines \& Systems:} Optimizing memory management, concurrent processing, and database interactions for production workloads.
+        \item \textbf{\color{primary}Automated Verification \& Telemetry:} Implementing end-to-end performance profiling, automated benchmarking suites, and telemetry frameworks.
+    \end{itemize}
+    \vspace{0.05cm}
+}%
+}\par}
 
 \cvsection{Professional Experience}
 
@@ -110,15 +121,16 @@
     \item Optimized detection accuracy and recognition precision by training multiple TensorFlow classifiers to 99.99\% accuracy through rigorous hardware-near algorithm tuning and automated benchmarking suites.
 \end{itemize}
 
+
 \cvsection{Selected Software Projects}
 
-\begin{itemize}
-    \item \textbf{Magnum C++ Game of Life:} High-performance C++ simulation focusing on memory layout and OO design (\href{\meinGithub}{GitHub}).\\
-    \textit{Tech: Modern C++, Memory Layout, Optimization, Grid Logic}
-    \item \textbf{AWS Cloud Deep Learning Pipeline:} MLOps pipeline with automated ingestion and PyTorch inference (\href{\meinGithub}{GitHub}).\\
-    \textit{Tech: AWS, Python, PyTorch, MLOps}
-    \item \textbf{Azure AI Document Analyzer \& RAG Infra:} RAG processing backend deployed on Azure with vector databases (\href{\meinGithub}{GitHub}).\\
-    \textit{Tech: Python, RAG, Vector DBs, REST APIs}
+\begin{itemize}[leftmargin=1.5em, itemsep=0.2em]
+    \item \textbf{Magnum C++ Game of Life:} High-performance C++ simulation focusing on low-level memory layout, cache locality, and object-oriented architecture (\href{https://github.com/CodeByMaxx/magnum-game-of-life}{GitHub}).\\
+    \textit{Tech: Modern C++, Memory Layout, Performance Optimization, Grid Logic}
+    \item \textbf{AWS Cloud Deep Learning Pipeline:} End-to-end cloud pipeline automating data ingestion and high-throughput PyTorch model inference (\href{https://github.com/CodeByMaxx/aws-pneumonia-detection}{GitHub}).\\
+    \textit{Tech: AWS, Python, PyTorch, MLOps, REST APIs}
+    \item \textbf{Azure AI Document Analyzer \& RAG Infra:} High-throughput document indexing and RAG retrieval backend deployed on Azure with vector databases (\href{https://github.com/CodeByMaxx/AI-Document-Analyzer}{GitHub}).\\
+    \textit{Tech: Python, RAG, Vector DBs, Azure, Microservices}
 \end{itemize}
 
 \cvsection{Technical Skills}
@@ -135,7 +147,7 @@
 
 \vspace{0.1cm}
 \textbf{B.Sc. Industrial Simulation} -- FH St. Pölten \daterange{09/2010}{06/2013}\\
-\textit{Thesis: Simulation of Nanocomposite Materials (\href{\meinGithub}{Link}, Advisor: Prof. Dr. T. Schrefl).}
+\textit{Thesis: Simulation of Nanocomposite Materials (\href{\meinGithub/thesis/blob/master/Bakkarbeit_final.pdf}{Link}, Advisor: Prof. Dr. T. Schrefl).}
 
 \engineeringApproach
 

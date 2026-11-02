@@ -1,0 +1,155 @@
+\documentclass[10pt,a4paper]{article}
+
+\newcommand{\cvRolle}{Senior Machine Learning Engineer \& Data Scientist}
+\newcommand{\cvSubheader}{AI Infrastructure $\cdot$ RAG Pipelines $\cdot$ Scientific Computing Specialist}
+
+\input{settings.tex}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\setlength{\parindent}{0pt}
+\setlist[itemize]{leftmargin=1.5em, itemsep=0.15em, topsep=0.15em}
+
+\cvHeader
+
+\cvsection{Professional Profile}
+
+% --- BILD LINKS, TEXT RECHTS UNTER DER ÜBERSCHRIFT ---
+\begin{minipage}[t]{0.22\textwidth}
+    \vspace{0pt}
+    \includegraphics[width=\linewidth, keepaspectratio]{profil.jpeg}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.75\textwidth}
+    \vspace{0pt}
+    Analytical Senior Machine Learning Engineer \& Data Scientist holding an M.Sc. in Scientific Computing with a strong mathematical foundation. Over 9 years of industry experience deploying production-grade AI pipelines and data architectures.\\\\[0.1cm]
+    Expertise bridges mathematical algorithm design, GPU edge acceleration (CUDA), and cloud-native RAG infrastructure (Vector DBs, PyTorch). Highly effective at productionizing complex ML models with high execution throughput.
+\end{minipage}
+
+\vspace{0.3cm}
+
+\cvsection{Engineering Profile}
+
+
+\colorbox{primary!10}{%
+\parbox{\dimexpr\textwidth-2\fboxsep\relax}{%
+    \vspace{0.10cm}
+    \centering
+    {\bfseries\color{primary} TECHNICAL FOUNDATION \& AI / DATA DOMAINS\par}
+    \vspace{0.08cm}
+
+    \begin{minipage}[t]{0.31\linewidth}
+        \raggedright
+        \textbf{\color{primary}AI \& RAG Infrastructure}\par
+        RAG Pipelines \& Vector Databases\\
+        PyTorch, TensorFlow, Keras, ONNX\\
+        LLM Orchestration (LangChain, LangGraph)
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.31\linewidth}
+        \raggedright
+        \textbf{\color{primary}Data Engineering \& Analytics}\par
+        PySpark, DuckDB, PostgreSQL\\
+        Scientific Computing (M.Sc. Vienna)\\
+        Apache Superset \& Data Pipelines
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.31\linewidth}
+        \raggedright
+        \textbf{\color{primary}Hardware Acceleration}\par
+        CUDA GPU Edge Acceleration\\
+        Embedded Vision Pipelines\\
+        Low-Latency Inference Engines
+    \end{minipage}
+
+    \vspace{0.08cm}
+}%
+}
+
+\vspace{0.15cm}
+\centering
+\colorbox{accent!25}{%
+\parbox{\dimexpr\textwidth-25\fboxsep\relax}{%
+    \vspace{0.08cm}
+    \centering
+    {\bfseries\color{primary}CORE TECHNICAL SPECIALIZATION -- ML \& DATA SYSTEMS\par}
+    \vspace{0.05cm}
+    \raggedright
+    \begin{itemize}[leftmargin=1.5em, itemsep=0.15em, topsep=0.15em]
+        \item \textbf{\color{accent}Production AI Infrastructure:} Designing scalable RAG architectures, vector database integration, and high-throughput LLM inference backends.
+        \item \textbf{\color{accent}Hardware Acceleration \& Edge ML:} Optimizing deep learning models (ONNX, PyTorch) via CUDA for low-latency execution on GPU edge hardware.
+        \item \textbf{\color{accent}Mathematical \& Data Pipelines:} Applying numerical algorithms, distributed data processing (PySpark, DuckDB), and automated verification to data workflows.
+    \end{itemize}
+    \vspace{0.05cm}
+}%
+}
+\end{centering}
+
+\cvsection{Professional Experience}
+
+\textbf{Mindbreeze GmbH -- Software / Quality Engineer (C++/Python)} \daterange{09/2022}{07/2026}\\
+\textit{C++, Python, REST APIs, Linux, Docker, Azure DevOps, Telemetry \& Performance Profiling \quad|\quad Team: 6 Engineers}
+\begin{itemize}
+    \item Optimized enterprise search index data pipelines for distributed data processing and large-scale document processing.
+    \item Engineered Python automation frameworks to measure end-to-end data throughput and system response latencies.
+    \item Resolved data pipeline memory degradations and performance bottlenecks during high-volume production releases.
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{EYYES -- Software Engineer (C++/Python)} \daterange{04/2017}{12/2020}\\
+\textit{C++, Python, Real-Time Execution Pipelines, CUDA, Embedded GPU Edge \quad|\quad Team: 8 Engineers}
+\begin{itemize}
+    \item Developed computer vision and deep learning pipelines (Keras, ONNX) for industrial camera systems to ensure continuous real-time edge performance.
+    \item Engineered low-latency C++ and CUDA execution routines for real-time video stream processing on embedded GPU edge devices.
+    \item Optimized detection accuracy and recognition precision through rigorous algorithm tuning and automated benchmarking suites.
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{logi.cals -- Embedded Software Engineer (C/C++)} \daterange{02/2021}{01/2022}\\
+\textit{C, C++, Embedded Systems, Deterministic Execution \quad|\quad Team: 6 Engineers}
+\begin{itemize}
+    \item Engineered deterministic C/C++ runtime execution systems and automated verification suites for complex hardware environments.
+\end{itemize}
+
+\vspace{0.15cm}
+\textbf{Untis GmbH -- Software Engineer (C++)} \daterange{02/2022}{06/2022}\\
+\textit{C++, System Refactoring, Performance Profiling \quad|\quad Team: 10 Engineers}
+\begin{itemize}
+    \item Refactored core modules to optimize memory allocation and algorithmic efficiency.
+\end{itemize}
+
+\cvsection{Selected Software Projects}
+
+\begin{itemize}
+    \item \textbf{Azure AI Document Analyzer \& RAG Infra:} RAG processing backend deployed on Azure using vector databases for unstructured document analysis (\href{\meinGithub}{GitHub}).\\
+    \textit{Tech: Python, RAG, Vector DBs, LangChain, REST APIs}
+    \item \textbf{AWS Cloud Deep Learning Pipeline:} MLOps pipeline with automated ingestion, PyTorch training, and cloud inference (\href{\meinGithub}{GitHub}).\\
+    \textit{Tech: AWS, Python, PyTorch, MLOps, Docker}
+    \item \textbf{PySpark Analytics Pipeline:} End-to-end data processing pipeline integrated with DuckDB and Apache Superset dashboards (\href{\meinGithub}{GitHub}).\\
+    \textit{Tech: PySpark, DuckDB, PostgreSQL, Apache Superset}
+\end{itemize}
+
+\cvsection{Technical Skills}
+
+\textbf{ML, AI \& Data:} PyTorch, TensorFlow, Keras, ONNX, RAG Infrastructure, Vector DBs, LangChain, LangGraph, PySpark, DuckDB, PostgreSQL, Apache Superset.\\[0.05em]
+\textbf{Core Systems \& GPU:} Modern C++, Python, CUDA, OpenCL, OpenMP, MPI, Linux, Docker, REST APIs.\\[0.05em]
+\textbf{Cloud \& DevOps:} Amazon AWS, Microsoft Azure, GitLab CI/CD, Git, Telemetry, Cursor, GitHub Copilot.
+
+\cvsection{Education}
+
+\textbf{M.Sc. Scientific Computing} -- University of Vienna \daterange{10/2013}{06/2017}\\
+\textit{Thesis: Silent Data Corruption in FT-GMRES (\href{https://utheses.univie.ac.at/detail/40917/}{Link}, Advisor: Prof. Dr. W. Gansterer).}
+
+\vspace{0.1cm}
+\textbf{B.Sc. Industrial Simulation} -- FH St. Pölten \daterange{09/2010}{06/2013}\\
+\textit{Thesis: Simulation of Nanocomposite Materials (\href{\meinGithub}{Link}, Advisor: Prof. Dr. T. Schrefl).}
+
+\engineeringApproach
+
+\cvsection{Languages \& Work Status}
+
+\textbf{German:} Native (C2) \quad$\cdot$\quad \textbf{English:} Full Professional Proficiency (C1/C2) \quad$\cdot$\quad \textbf{Work Permit:} EU Citizen / Austria
+
+\end{document}

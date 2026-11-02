@@ -13,6 +13,8 @@
 \usepackage{charter}
 \usepackage{microtype}
 \usepackage{etoolbox}
+\usepackage{ifthen}
+\usepackage{pdftexcmds}
 
 % --- DESIGN FARBEN ---
 \definecolor{primary}{RGB}{15, 23, 42}      % Deep Slate / Tech Dark
@@ -30,40 +32,40 @@
 
 % --- ROLLEN-DEFAULTS ---
 \providecommand{\cvRolle}{}
-\renewcommand{\cvRolle}{AI & Automation Engineer -- M&A Deal Automation}
+\renewcommand{\cvRolle}{Senior Machine Learning Engineer \\& Data Scientist}
 \providecommand{\cvSubheader}{}
-\renewcommand{\cvSubheader}{Python \cdot LLM APIs (OpenAI, Anthropic) \cdot Financial Data Pipelines \cdot Agent Workflows \cdot RAG}
+\renewcommand{\cvSubheader}{AI Infrastructure \quad\textperiodcentered\quad RAG Pipelines \quad\textperiodcentered\quad Scientific Computing Specialist}
 
 % --- EMPFÄNGER-DATEN ---
-\newcommand{\firmenName}{MP Corporate Finance}
-\newcommand{\ansprechPartner}{Katharina Schwarzl-Moser (HR Manager)}
-\newcommand{\firmenStrasse}{Wien, Österreich}
-\newcommand{\firmenOrt}{Wien, Österreich}
+\newcommand{\firmenName}{Lokaler\_Testlauf}
+\newcommand{\ansprechPartner}{Recruiting Team}
+\newcommand{\firmenStrasse}{Österreich}
+\newcommand{\firmenOrt}{Österreich}
 
 % --- INTELLIGENTE ADRESS-AUSGABE (Verhindert doppelte Zeilen, wenn Straße == Ort) ---
 \newcommand{\firmenAdresse}{%
-    \def\tempStrasse{Wien, Österreich}%
-    \def\tempOrt{Wien, Österreich}%
+    \def\tempStrasse{Österreich}%
+    \def\tempOrt{Österreich}%
     \ifx\tempStrasse\tempOrt
         \tempOrt%
     \else
-        Wien, Österreich \\[0.15em] Wien, Österreich%
+        Österreich \\[0.15em] Österreich%
     \fi
 }
 
-\newcommand{\stellenTitel}{AI & Automation Engineer (f/m/x)}
+\newcommand{\stellenTitel}{Senior Machine Learning Engineer \\& Data Scientist}
 \newcommand{\referenzNummer}{}
 
-\newcommand{\anrede}{Dear Ms. Schwarzl-Moser,}
-\newcommand{\firmenHighlight}{MP Corporate Finance is one of Europe's leading mid-market M&A boutiques, where your AI tools will be deployed on live cross-border transactions from day one.}
+\newcommand{\anrede}{Dear Recruiting Team,}
+\newcommand{\firmenHighlight}{Local compilation with optimized tech stack.}
 
 % --- HEADER BEFEHL ---
 \newcommand{\cvHeader}{%
 \begin{center}
     {\Huge\bfseries\color{primary} \meinName}\\[0.1cm]
-    {\large\bfseries \cvRolle}\\[0.05cm]
-    {\color{accent}\textbf{\cvSubheader}}\\[0.1cm]
-    {\small \meinOrt, Austria \quad$\cdot$\quad \meineTel \quad$\cdot$\quad \href{mailto:\meineEmail}{\meineEmail} \quad$\cdot$\quad \href{\meinLinkedin}{LinkedIn} \quad$\cdot$\quad \href{\meinGithub}{GitHub}}
+    {\LARGE\bfseries \cvRolle}\\[0.05cm]
+    {\color{primary}\textbf{\cvSubheader}}\\[0.1cm]
+    {\small \meinOrt, Austria \quad\textperiodcentered\quad \meineTel \quad\textperiodcentered\quad \href{mailto:\meineEmail}{\meineEmail} \quad\textperiodcentered\quad \href{\meinLinkedin}{LinkedIn} \quad\textperiodcentered\quad \href{\meinGithub}{GitHub}}
 \end{center}
 \vspace{0.1cm}
 }
@@ -78,13 +80,21 @@
 
 \newcommand{\daterange}[2]{\hfill{\small #1 -- #2}}
 
-% --- ENGINEERING APPROACH & MINDSET DEFINITION ---
+% --- ENGINEERING APPROACH & MINDSET DEFINITION (SPRACHABHÄNGIG) ---
 \newcommand{\engineeringApproach}{%
-    \cvsection{Engineering Approach \& Mindset}%
+    \cvsection{\ifnum\pdfstrcmp{\languagename}{ngerman}=0 Arbeitsweise \& Mindset\else Engineering Approach \& Mindset\fi}%
     \begin{itemize}[leftmargin=*, itemsep=2pt]%
-        \item \textbf{Systematic Problem Solving:} First-principles analytical approach to systematic debugging and stability optimization.%
-        \item \textbf{Quality & Efficiency Focus:} Pragmatic engineering mindset balancing rapid deployment with long-term maintainability and high performance.%
-        \item \textbf{Cross-Functional Integration:} Acts as the technical glue bridging development, QA, and architecture.%
+        \ifnum\pdfstrcmp{\languagename}{ngerman}=0
+            % --- DEUTSCHE VERSION ---
+            \item \textbf{Systematisches Problemlösen:} Analytischer First-Principles-Ansatz für systematisches Debugging und Stabilitätsoptimierung.%
+            \item \textbf{Fokus auf Qualität \& Effizienz:} Pragmatisches Engineering-Mindset, das schnelles Deployment mit langfristiger Wartbarkeit und hoher Performance verbindet.%
+            \item \textbf{Funktionsübergreifende Integration:} Fungiert als technisches Bindeglied zwischen Entwicklung, QA und Architektur.%
+        \else
+            % --- ENGLISCHE VERSION ---
+            \item \textbf{Systematic Problem Solving:} First-principles analytical approach to systematic debugging and stability optimization.%
+            \item \textbf{Quality \& Efficiency Focus:} Pragmatic engineering mindset balancing rapid deployment with long-term maintainability and high performance.%
+            \item \textbf{Cross-Functional Integration:} Acts as the technical glue bridging development, QA, and architecture.%
+        \fi
     \end{itemize}%
 }
 

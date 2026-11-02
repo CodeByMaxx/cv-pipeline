@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.27)  2 NOV 2026 15:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.27)  2 NOV 2026 19:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -319,7 +319,7 @@ File: microtype.cfg 2023/03/13 v3.1a microtype main configuration file (RS)
 (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 108.
+Package hyperref Info: Option `colorlinks' set `true' on input line 111.
 )
 LaTeX Font Info:    Trying to load font information for T1+bch on input line 10
 .
@@ -461,11 +461,6 @@ File: profil.jpeg Graphic file (type jpg)
 Package pdftex.def Info: profil.jpeg  used on input line 22.
 (pdftex.def)             Requested size: 108.91771pt x 108.91493pt.
 
-Underfull \hbox (badness 1968) in paragraph at lines 27--29
-\T1/bch/m/n/10 (+20) Spezialisiert auf GPU-Beschleunigung (CUDA/ONNX), RAG-Arch
-itekturen und
- []
-
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
@@ -475,18 +470,31 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 68.
 
-Overfull \hbox (23.40219pt too wide) in paragraph at lines 94--95
-[]\T1/bch/m/n/10 (-20) Optimierung von Indizierungs- und Suchdatenpipelines für
- Enterprise-Suchmaschinen und verteilte Datenverarbeitung. 
+Overfull \hbox (33.46678pt too wide) in paragraph at lines 95--96
+[]\T1/bch/m/n/10 (-20) Optimierung leistungskritischer Backend-Komponenten für 
+Unternehmensarchitekturen zur verteilten Datenverarbeitung. 
  []
 
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-di
 st/fonts/enc/dvips/base/8r.enc} <./profil.jpeg>]
-Overfull \hbox (18.49727pt too wide) in paragraph at lines 119--120
-[]\T1/bch/m/n/10 (-20) Training multipler TensorFlow-Klassifikatoren auf 99,99%
- Erkennungsgenauigkeit durch hardwarenahes Algorithmen-
+! Misplaced alignment tab character &.
+<argument> Technischer Ansatz &
+                                Arbeitsweise
+l.161 \engineeringApproachde
+                            
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+
+Overfull \hbox (2.48799pt too wide) in paragraph at lines 161--161
+[]\T1/bch/b/n/10 (-20) Funktionsübergreifende Zusammenarbeit: \T1/bch/m/n/10 (-
+20) Übernimmt eine verbindende technische Rolle zwischen Entwicklung,
  []
 
 [2] (output/Lokale_Rollen_Laeufe/cv_mlds_de/cv_mlds_de.aux)
@@ -498,19 +506,19 @@ Package rerunfilecheck Info: File `cv_mlds_de.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13066 strings out of 476182
- 208181 string characters out of 5795594
- 1940975 words of memory out of 5000000
- 34823 multiletter control sequences out of 15000+600000
- 592550 words of font info for 111 fonts, out of 8000000 for 9000
+ 13077 strings out of 476182
+ 208296 string characters out of 5795594
+ 1939975 words of memory out of 5000000
+ 34825 multiletter control sequences out of 15000+600000
+ 593330 words of font info for 117 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 80i,6n,82p,1007b,582s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 80i,6n,82p,1007b,456s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
 Output written on output/Lokale_Rollen_Laeufe/cv_mlds_de/cv_mlds_de.pdf (2 page
-s, 163379 bytes).
+s, 164322 bytes).
 PDF statistics:
  47 PDF objects out of 1000 (max. 8388607)
  33 compressed objects within 1 object stream

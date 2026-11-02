@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.27)  2 NOV 2026 15:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.27)  2 NOV 2026 19:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -319,7 +319,7 @@ File: microtype.cfg 2023/03/13 v3.1a microtype main configuration file (RS)
 (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 108.
+Package hyperref Info: Option `colorlinks' set `true' on input line 111.
 )
 LaTeX Font Info:    Trying to load font information for T1+bch on input line 10
 .
@@ -478,8 +478,26 @@ Unternehmensarchitekturen zur verteilten Datenverarbeitung.
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-di
-st/fonts/enc/dvips/base/8r.enc} <./profil.jpeg>] [2]
-(output/Lokale_Rollen_Laeufe/cv_backend_de/cv_backend_de.aux)
+st/fonts/enc/dvips/base/8r.enc} <./profil.jpeg>]
+! Misplaced alignment tab character &.
+<argument> Technischer Ansatz &
+                                Arbeitsweise
+l.160 \engineeringApproachde
+                            
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+
+Overfull \hbox (2.48799pt too wide) in paragraph at lines 160--160
+[]\T1/bch/b/n/10 (-20) Funktionsübergreifende Zusammenarbeit: \T1/bch/m/n/10 (-
+20) Übernimmt eine verbindende technische Rolle zwischen Entwicklung,
+ []
+
+[2] (output/Lokale_Rollen_Laeufe/cv_backend_de/cv_backend_de.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -488,10 +506,10 @@ Package rerunfilecheck Info: File `cv_backend_de.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13081 strings out of 476182
- 208400 string characters out of 5795594
+ 13083 strings out of 476182
+ 208431 string characters out of 5795594
  1939975 words of memory out of 5000000
- 34823 multiletter control sequences out of 15000+600000
+ 34825 multiletter control sequences out of 15000+600000
  593855 words of font info for 121 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  80i,6n,82p,1010b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -500,7 +518,7 @@ share/texlive/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
 Output written on output/Lokale_Rollen_Laeufe/cv_backend_de/cv_backend_de.pdf (
-2 pages, 163472 bytes).
+2 pages, 164433 bytes).
 PDF statistics:
  47 PDF objects out of 1000 (max. 8388607)
  33 compressed objects within 1 object stream

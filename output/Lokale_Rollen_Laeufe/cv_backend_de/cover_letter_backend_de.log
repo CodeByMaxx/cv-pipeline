@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.27)  2 NOV 2026 15:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.27)  2 NOV 2026 19:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -319,7 +319,7 @@ File: microtype.cfg 2023/03/13 v3.1a microtype main configuration file (RS)
 (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 108.
+Package hyperref Info: Option `colorlinks' set `true' on input line 111.
 )
 LaTeX Font Info:    Trying to load font information for T1+bch on input line 8.
 
@@ -511,11 +511,11 @@ Package rerunfilecheck Info: File `cover_letter_backend_de.out' has not changed
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13038 strings out of 476182
- 208018 string characters out of 5795594
+ 13040 strings out of 476182
+ 208050 string characters out of 5795594
  1932975 words of memory out of 5000000
- 34808 multiletter control sequences out of 15000+600000
- 585890 words of font info for 106 fonts, out of 8000000 for 9000
+ 34813 multiletter control sequences out of 15000+600000
+ 585630 words of font info for 104 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  80i,5n,82p,1020b,455s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/bitstrea/charter/bchb8a.pfb></usr/
@@ -523,7 +523,7 @@ share/texlive/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
 Output written on output/Lokale_Rollen_Laeufe/cv_backend_de/cover_letter_backen
-d_de.pdf (1 page, 58020 bytes).
+d_de.pdf (1 page, 57916 bytes).
 PDF statistics:
  37 PDF objects out of 1000 (max. 8388607)
  25 compressed objects within 1 object stream

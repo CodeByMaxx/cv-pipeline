@@ -57,7 +57,10 @@
 \newcommand{\referenzNummer}{}
 
 \newcommand{\anrede}{Dear Recruiting Team,}
-\newcommand{\firmenHighlight}{Local compilation with optimized tech stack.}
+\newcommand{\firmenHighlight}{modern cloud infrastructure}
+
+% --- DYNAMISCHER FLIESSTEXT-BEZUG (Sprachabhängig gesteuert über Python) ---
+\newcommand{\firmenFlussbezug}{\textbf{Your company}~}
 
 % --- HEADER BEFEHL ---
 \newcommand{\cvHeader}{%
@@ -92,7 +95,7 @@
         \else
             % --- ENGLISCHE VERSION ---
             \item \textbf{Systematic Problem Solving:} First-principles analytical approach to systematic debugging and stability optimization.%
-            \item \textbf{Quality \& Efficiency Focus:} Pragmatic engineering mindset balancing rapid deployment with long-term maintainability and high performance.%
+            \item \textbf{Quality & Efficiency Focus:} Pragmatic engineering mindset balancing rapid deployment with long-term maintainability and high performance.%
             \item \textbf{Cross-Functional Integration:} Acts as the technical glue bridging development, QA, and architecture.%
         \fi
     \end{itemize}%

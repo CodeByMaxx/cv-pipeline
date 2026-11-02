@@ -47,7 +47,7 @@ class JobMetadata(BaseModel):
     )
     contact_person: str = Field(
         default="Recruiting Team",
-        description="Name des Ansprechpartners inkl. Rolle/Titel (z.B. 'Katharina Schwarzl-Moser (HR Manager)'), sonst 'Recruiting Team'",
+        description="Name des Ansprechpartners inkl. Rolle/Titel (z.B. 'Katharina Schwarzl-Moser (HR Manager)'). Falls kein Name genannt wird, verwende 'Recruiting Team'.",
     )
     job_title: str = Field(description="Exakter Titel der ausgeschriebenen Stelle")
     location: str = Field(
@@ -79,10 +79,10 @@ class JobMetadata(BaseModel):
     )
 
     salutation: str = Field(
-        description="Passende Anrede (z.B. 'Dear Recruiting Team,' oder 'Sehr geehrte Damen und Herren,')"
+        description="Passende Anrede (z.B. 'Sehr geehrte Frau Müller,' oder 'Dear Mr. Smith,'). Falls kein Name bekannt ist, verwende 'Sehr geehrte Damen und Herren,' bzw. 'Dear Recruiting Team,'."
     )
     company_highlight: str = Field(
-        description="Ein prägnanter Satz auf Englisch oder Deutsch über den Fokus des Unternehmens/der Rolle für das Anschreiben"
+        description="Ein sehr kurzer, prägnanter Fokus auf Deutsch oder Englisch (MAXIMAL 3-6 Wörter, z.B. 'der modernen Cloud-Architektur und KI-Integration' oder 'your focus on automated cloud platforms'). KEINE ganzen Sätze, KEINE Nennung des Firmennamens!"
     )
 
 
@@ -123,7 +123,13 @@ def analyze_with_ollama(job_text: str) -> JobMetadata:
     llm = ChatOllama(model=OLLAMA_MODEL_NAME, temperature=0)
     structured_llm = llm.with_structured_output(JobMetadata)
 
-    prompt = f"Analysiere die folgende Stellenanzeige und extrahiere die Daten exakt im vorgegebenen Schema:\n\n{job_text}"
+    prompt = (
+        "Analysiere die folgende Stellenanzeige. "
+        "WICHTIG: Falls im Text ein echter Name eines Ansprechpartners (Recruiter, HR Manager, Hiring Manager) steht, extrahiere diesen bei 'contact_person' "
+        "und setze eine persönliche Anrede unter 'salutation' (z.B. 'Sehr geehrte Frau X,' oder 'Dear Mr. Y,'). "
+        "Falls absolut kein Name genannt wird, verwende 'Recruiting Team' und 'Sehr geehrte Damen und Herren,' (bzw. 'Dear Recruiting Team,').\n\n"
+        f"Stellenanzeige:\n{job_text}"
+    )
     return structured_llm.invoke(prompt)
 
 
@@ -137,7 +143,13 @@ def analyze_with_gemini(job_text: str) -> JobMetadata:
         api_key=api_key, http_options=types.HttpOptions(timeout=60000)
     )
 
-    prompt = f"Analysiere die folgende Stellenanzeige und extrahiere die Daten exakt im vorgegebenen Schema:\n\n{job_text}"
+    prompt = (
+        "Analysiere die folgende Stellenanzeige. "
+        "WICHTIG: Falls im Text ein echter Name eines Ansprechpartners (Recruiter, HR Manager, Hiring Manager) steht, extrahiere diesen bei 'contact_person' "
+        "und setze eine persönliche Anrede unter 'salutation' (z.B. 'Sehr geehrte Frau X,' oder 'Dear Mr. Y,'). "
+        "Falls absolut kein Name genannt wird, verwende 'Recruiting Team' und 'Sehr geehrte Damen und Herren,' (bzw. 'Dear Recruiting Team,').\n\n"
+        f"Stellenanzeige:\n{job_text}"
+    )
 
     config = types.GenerateContentConfig(
         response_mime_type="application/json",
@@ -192,7 +204,7 @@ def analyze_with_azure(job_text: str) -> JobMetadata:
         messages=[
             {
                 "role": "system",
-                "content": "Analysiere die Stellenanzeige und extrahiere die Metadaten.",
+                "content": "Analysiere die Stellenanzeige und extrahiere Metadaten. Achte darauf, echte Namen von Ansprechpartnern zu bevorzugen und 'Recruiting Team' nur zu nutzen, wenn kein Name vorhanden ist.",
             },
             {"role": "user", "content": job_text},
         ],
@@ -213,7 +225,11 @@ def analyze_with_aws(job_text: str) -> JobMetadata:
     )
 
     bedrock = boto3.client(service_name="bedrock-runtime", region_name=aws_region)
-    prompt = f"Analysiere die folgende Stellenanzeige und extrahiere die Daten exakt im Schema:\n\n{job_text}"
+    prompt = (
+        "Analysiere die folgende Stellenanzeige. Extrahiere echte Ansprechpartner und passende Anreden, "
+        "vermeide 'Recruiting Team' falls eine konkrete Person genannt wird.\n\n"
+        f"{job_text}"
+    )
 
     model_id = os.getenv(
         "AWS_BEDROCK_MODEL_ID", "eu.anthropic.claude-sonnet-4-5-20250929-v1:0"
@@ -305,6 +321,9 @@ SETTINGS_TEMPLATE = r"""% ==========================================
 \newcommand{\anrede}{__SALUTATION__}
 \newcommand{\firmenHighlight}{__COMPANY_HIGHLIGHT__}
 
+% --- DYNAMISCHER FLIESSTEXT-BEZUG (Sprachabhängig gesteuert über Python) ---
+\newcommand{\firmenFlussbezug}{__FIRMEN_FLUSSBEZUG__}
+
 % --- HEADER BEFEHL ---
 \newcommand{\cvHeader}{%
 \begin{center}
@@ -338,7 +357,7 @@ SETTINGS_TEMPLATE = r"""% ==========================================
         \else
             % --- ENGLISCHE VERSION ---
             \item \textbf{Systematic Problem Solving:} First-principles analytical approach to systematic debugging and stability optimization.%
-            \item \textbf{Quality \& Efficiency Focus:} Pragmatic engineering mindset balancing rapid deployment with long-term maintainability and high performance.%
+            \item \textbf{Quality & Efficiency Focus:} Pragmatic engineering mindset balancing rapid deployment with long-term maintainability and high performance.%
             \item \textbf{Cross-Functional Integration:} Acts as the technical glue bridging development, QA, and architecture.%
         \fi
     \end{itemize}%
@@ -359,7 +378,6 @@ def escape_latex(text: str) -> str:
     """Maskiert LaTeX-Sonderzeichen in Dynamik-Strings."""
     if not text:
         return ""
-    # Erst Backslashes, dann Sonderzeichen
     chars = {
         "&": r"\&",
         "%": r"\%",
@@ -385,6 +403,13 @@ def render_settings(meta: JobMetadata, lang: str) -> str:
     )
     country = "Österreich" if lang.lower() in ["de", "deutsch", "german"] else "Austria"
 
+    # Externe Sprachsteuerung für das Cover Letter (Ihr Unternehmen vs. Your company)
+    flussbezug = (
+        r"\textbf{Ihr Unternehmen}~"
+        if lang.lower() in ["de", "deutsch", "german"]
+        else r"\textbf{Your company}~"
+    )
+
     # Bereinige das Kerning bei Trennzeichen im Subheader
     clean_subheader = re.sub(
         r"\\cdot|·", r"\\quad\\textperiodcentered\\quad", meta.cv_subheader
@@ -393,6 +418,7 @@ def render_settings(meta: JobMetadata, lang: str) -> str:
     return (
         SETTINGS_TEMPLATE.replace("__BABEL_LANG__", babel_lang)
         .replace("__COUNTRY__", country)
+        .replace("__FIRMEN_FLUSSBEZUG__", flussbezug)
         .replace("__CV_ROLLE__", escape_latex(meta.cv_rolle))
         .replace("__CV_SUBHEADER__", clean_subheader)
         .replace("__COMPANY_NAME__", escape_latex(meta.company_name))
@@ -608,7 +634,7 @@ def run_pipeline(
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="CV Pipeline CLI")
     parser.add_argument(
-        "source", nargs="?", help="URL der Stellenanzeige oder Pfad zu Textdatei"
+        "source", nargs="?", help="URL der Stellenanzeige oder Pfad zur Textdatei"
     )
     parser.add_argument(
         "--lang",
@@ -673,9 +699,9 @@ if __name__ == "__main__":
                     else "Dear Recruiting Team,"
                 )
                 highlight = (
-                    "Lokale Kompilierung mit optimiertem Tech-Stack."
+                    "der Modernisierung von Cloud-Infrastrukturen"
                     if current_lang == "de"
-                    else "Local compilation with optimized tech stack."
+                    else "modern cloud infrastructure"
                 )
 
                 meta = JobMetadata(

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.27)  2 NOV 2026 15:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.27)  2 NOV 2026 19:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -319,9 +319,9 @@ File: microtype.cfg 2023/03/13 v3.1a microtype main configuration file (RS)
 (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 108.
+Package hyperref Info: Option `colorlinks' set `true' on input line 111.
 )
-LaTeX Font Info:    Trying to load font information for T1+bch on input line 8.
+LaTeX Font Info:    Trying to load font information for T1+bch on input line 9.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1bch.fd
@@ -335,24 +335,24 @@ File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 (output/Lokale_Rollen_Laeufe/cv_devops_de/cover_letter_devops_de.aux)
 \openout1 = `cover_letter_devops_de.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 8.
-LaTeX Font Info:    ... okay on input line 8.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -410,26 +410,26 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring ON on input line 8.
+Package hyperref Info: Link coloring ON on input line 9.
 
 (output/Lokale_Rollen_Laeufe/cv_devops_de/cover_letter_devops_de.out)
 (output/Lokale_Rollen_Laeufe/cv_devops_de/cover_letter_devops_de.out)
 \@outlinefile=\write3
 \openout3 = `cover_letter_devops_de.out'.
 
-LaTeX Info: Redefining \microtypecontext on input line 8.
-Package microtype Info: Applying patch `item' on input line 8.
-Package microtype Info: Applying patch `toc' on input line 8.
-Package microtype Info: Applying patch `eqnum' on input line 8.
-Package microtype Info: Applying patch `footnote' on input line 8.
-Package microtype Info: Applying patch `verbatim' on input line 8.
+LaTeX Info: Redefining \microtypecontext on input line 9.
+Package microtype Info: Applying patch `item' on input line 9.
+Package microtype Info: Applying patch `toc' on input line 9.
+Package microtype Info: Applying patch `eqnum' on input line 9.
+Package microtype Info: Applying patch `footnote' on input line 9.
+Package microtype Info: Applying patch `verbatim' on input line 9.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 8.
+LaTeX Info: Redefining \showhyphens on input line 9.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -441,7 +441,7 @@ File: mt-bch.cfg 2007/03/03 v1.5 microtype config. file: Bitstream Charter (RS)
 ! Misplaced alignment tab character &.
 <recently read> &
                  
-l.13 ...all \color{accent} \bfseries \stellenTitel
+l.14 ...all \color{accent} \bfseries \stellenTitel
                                                   }
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -455,30 +455,30 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 (RS)
 )
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 17.
+(Font)              <9> on input line 18.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 17.
+(Font)              <6> on input line 18.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 17.
+(Font)              <5> on input line 18.
 
-Overfull \hbox (2.31042pt too wide) in paragraph at lines 11--21
+Overfull \hbox (2.31042pt too wide) in paragraph at lines 12--22
 [][] [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 29--32
+Underfull \hbox (badness 10000) in paragraph at lines 30--33
 
  []
 
 
-Overfull \hbox (2.31042pt too wide) in paragraph at lines 27--37
+Overfull \hbox (2.31042pt too wide) in paragraph at lines 28--38
 [][] [] 
  []
 
 ! Misplaced alignment tab character &.
 <recently read> &
                  
-l.42 ...color{primary} Bewerbung als \stellenTitel
+l.43 ...color{primary} Bewerbung als \stellenTitel
                                                   }
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -488,22 +488,16 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 
-Overfull \hbox (10.378pt too wide) in paragraph at lines 58--59
-\T1/bch/m/n/10 (-20) Pipelines, automatisierte Testinfrastrukturen und containe
-risierte Cloud-Plattformen, die Release-Zyklen beschleunigen,
+Underfull \hbox (badness 1675) in paragraph at lines 59--60
+\T1/bch/m/n/10 (+20) Pipelines, automatisierte Testinfrastrukturen und containe
+risierte Cloud-Plattformen, die Release-Zyklen
  []
 
 LaTeX Font Info:    Trying to load font information for TS1+bch on input line 6
-5.
+6.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1bch.fd
 File: ts1bch.fd 2004/10/18 font definitions for TS1/bch.
-)
-Overfull \hbox (15.06259pt too wide) in paragraph at lines 67--68
-[]\T1/bch/b/n/10 (-20) Developer Experience (DevEx): \T1/bch/m/n/10 (-20) Mein 
-Hintergrund als C++/Python-Entwickler ermöglicht es mir, die Arbeitsabläufe
- []
-
-[1
+) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-di
 st/fonts/enc/dvips/base/8r.enc}]
@@ -517,10 +511,10 @@ Package rerunfilecheck Info: File `cover_letter_devops_de.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 13038 strings out of 476182
- 207994 string characters out of 5795594
+ 13043 strings out of 476182
+ 208056 string characters out of 5795594
  1932975 words of memory out of 5000000
- 34808 multiletter control sequences out of 15000+600000
+ 34813 multiletter control sequences out of 15000+600000
  585900 words of font info for 106 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  80i,5n,82p,1019b,455s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -529,7 +523,7 @@ share/texlive/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
 Output written on output/Lokale_Rollen_Laeufe/cv_devops_de/cover_letter_devops_
-de.pdf (1 page, 59364 bytes).
+de.pdf (1 page, 59322 bytes).
 PDF statistics:
  37 PDF objects out of 1000 (max. 8388607)
  25 compressed objects within 1 object stream

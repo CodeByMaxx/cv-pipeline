@@ -352,7 +352,7 @@ SETTINGS_TEMPLATE = r"""% ==========================================
         \ifnum\pdfstrcmp{\languagename}{ngerman}=0
             % --- DEUTSCHE VERSION ---
             \item \textbf{Systematisches Problemlösen:} Analytischer First-Principles-Ansatz für systematisches Debugging und Stabilitätsoptimierung.%
-            \item \textbf{Fokus auf Qualität \& Effizienz:} Pragmatisches Engineering-Mindset, das schnelles Deployment mit langfristiger Wartbarkeit und hoher Performance verbindet.%
+            \item \textbf{Fokus auf Qualität & Effizienz:} Pragmatisches Engineering-Mindset, das schnelles Deployment mit langfristiger Wartbarkeit und hoher Performance verbindet.%
             \item \textbf{Funktionsübergreifende Integration:} Fungiert als technisches Bindeglied zwischen Entwicklung, QA und Architektur.%
         \else
             % --- ENGLISCHE VERSION ---
@@ -477,17 +477,16 @@ def cleanup_target_dir(target_dir: Path):
 # ==========================================
 CSV_FILE = "applications.csv"
 CSV_HEADERS = [
+    "E",
     "Gefunden am / Monat",
     "Link / Quelle",
     "Priorität",
     "Status",
     "Bewerbungsdatum",
     "Company",
-    "Unternehmensgröße (weltweit)",
-    "Sprache",
+    "Firmengröße (weltweit, ca.)",
     "Template",
     "Role",
-    "LLM Model",
     "Grund Absage",
     "Hauptsitz",
 ]
@@ -495,20 +494,19 @@ CSV_HEADERS = [
 
 def append_to_csv(meta: JobMetadata, source: str, used_model: str, resolved_lang: str):
     file_exists = Path(CSV_FILE).exists()
-    today_str = date.today().strftime("%Y-%m-%d")
+    today_str = date.today().strftime("%d.%m.%Y")
 
     row = {
+        "E": "",
         "Gefunden am / Monat": today_str,
         "Link / Quelle": source or "Manual / Compile-Only",
         "Priorität": "Hoch",
         "Status": "Erstellt",
         "Bewerbungsdatum": today_str,
         "Company": meta.company_name,
-        "Unternehmensgröße (weltweit)": meta.company_size,
-        "Sprache": "Deutsch" if resolved_lang == "de" else "Englisch",
+        "Firmengröße (weltweit, ca.)": meta.company_size,
         "Template": meta.cv_variant,
         "Role": meta.job_title,
-        "LLM Model": used_model,
         "Grund Absage": "",
         "Hauptsitz": meta.location,
     }

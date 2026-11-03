@@ -3,7 +3,7 @@
 % ==========================================
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[american]{babel}
+\usepackage[german]{babel}
 \usepackage[top=1.8cm, bottom=1.8cm, left=1.8cm, right=1.8cm]{geometry}
 \usepackage{xcolor}
 \usepackage{hyperref}
@@ -32,35 +32,35 @@
 
 % --- ROLLEN-DEFAULTS ---
 \providecommand{\cvRolle}{}
-\renewcommand{\cvRolle}{Senior Machine Learning Engineer \\& Data Scientist}
+\renewcommand{\cvRolle}{}
 \providecommand{\cvSubheader}{}
-\renewcommand{\cvSubheader}{AI Infrastructure \quad\textperiodcentered\quad RAG Pipelines \quad\textperiodcentered\quad Scientific Computing Specialist}
+\renewcommand{\cvSubheader}{}
 
 % --- EMPFÄNGER-DATEN ---
-\newcommand{\firmenName}{Lokaler\_Testlauf}
+\newcommand{\firmenName}{}
 \newcommand{\ansprechPartner}{Recruiting Team}
-\newcommand{\firmenStrasse}{Österreich}
-\newcommand{\firmenOrt}{Österreich}
+\newcommand{\firmenStrasse}{}
+\newcommand{\firmenOrt}{}
 
-% --- INTELLIGENTE ADRESS-AUSGABE (Verhindert doppelte Zeilen, wenn Straße == Ort) ---
+% --- INTELLIGENTE ADRESS-AUSGABE ---
 \newcommand{\firmenAdresse}{%
-    \def\tempStrasse{Österreich}%
-    \def\tempOrt{Österreich}%
+    \def\tempStrasse{}%
+    \def\tempOrt{}%
     \ifx\tempStrasse\tempOrt
         \tempOrt%
     \else
-        Österreich \\[0.15em] Österreich%
+         \\[0.15em] %
     \fi
 }
 
-\newcommand{\stellenTitel}{Senior Machine Learning Engineer \\& Data Scientist}
+\newcommand{\stellenTitel}{}
 \newcommand{\referenzNummer}{}
 
-\newcommand{\anrede}{Dear Recruiting Team,}
-\newcommand{\firmenHighlight}{modern cloud infrastructure}
+\newcommand{\anrede}{Sehr geehrte Damen und Herren,}
+\newcommand{\firmenHighlight}{<UNKNOWN>}
 
-% --- DYNAMISCHER FLIESSTEXT-BEZUG (Sprachabhängig gesteuert über Python) ---
-\newcommand{\firmenFlussbezug}{\textbf{Your company}~}
+% --- DYNAMISCHER FLIESSTEXT-BEZUG ---
+\newcommand{\firmenFlussbezug}{\textbf{Ihr Unternehmen}~}
 
 % --- HEADER BEFEHL ---
 \newcommand{\cvHeader}{%
@@ -68,7 +68,7 @@
     {\Huge\bfseries\color{primary} \meinName}\\[0.1cm]
     {\LARGE\bfseries \cvRolle}\\[0.05cm]
     {\color{primary}\textbf{\cvSubheader}}\\[0.1cm]
-    {\small \meinOrt, Austria \quad\textperiodcentered\quad \meineTel \quad\textperiodcentered\quad \href{mailto:\meineEmail}{\meineEmail} \quad\textperiodcentered\quad \href{\meinLinkedin}{LinkedIn} \quad\textperiodcentered\quad \href{\meinGithub}{GitHub}}
+    {\small \meinOrt, Österreich \quad\textperiodcentered\quad \meineTel \quad\textperiodcentered\quad \href{mailto:\meineEmail}{\meineEmail} \quad\textperiodcentered\quad \href{\meinLinkedin}{LinkedIn} \quad\textperiodcentered\quad \href{\meinGithub}{GitHub}}
 \end{center}
 \vspace{0.1cm}
 }
@@ -83,17 +83,15 @@
 
 \newcommand{\daterange}[2]{\hfill{\small #1 -- #2}}
 
-% --- ENGINEERING APPROACH & MINDSET DEFINITION (SPRACHABHÄNGIG) ---
+% --- ENGINEERING APPROACH & MINDSET DEFINITION ---
 \newcommand{\engineeringApproach}{%
-    \cvsection{\ifnum\pdfstrcmp{\languagename}{ngerman}=0 Arbeitsweise \& Mindset\else Engineering Approach \& Mindset\fi}%
+    \cvsection{\ifnum\pdfstrcmp{\languagename}{german}=0 Arbeitsweise \& Mindset\else Engineering Approach \& Mindset\fi}%
     \begin{itemize}[leftmargin=*, itemsep=2pt]%
-        \ifnum\pdfstrcmp{\languagename}{ngerman}=0
-            % --- DEUTSCHE VERSION ---
+        \ifnum\pdfstrcmp{\languagename}{german}=0
             \item \textbf{Systematisches Problemlösen:} Analytischer First-Principles-Ansatz für systematisches Debugging und Stabilitätsoptimierung.%
-            \item \textbf{Fokus auf Qualität \& Effizienz:} Pragmatisches Engineering-Mindset, das schnelles Deployment mit langfristiger Wartbarkeit und hoher Performance verbindet.%
+            \item \textbf{Fokus auf Qualität & Effizienz:} Pragmatisches Engineering-Mindset, das schnelles Deployment mit langfristiger Wartbarkeit und hoher Performance verbindet.%
             \item \textbf{Funktionsübergreifende Integration:} Fungiert als technisches Bindeglied zwischen Entwicklung, QA und Architektur.%
         \else
-            % --- ENGLISCHE VERSION ---
             \item \textbf{Systematic Problem Solving:} First-principles analytical approach to systematic debugging and stability optimization.%
             \item \textbf{Quality & Efficiency Focus:} Pragmatic engineering mindset balancing rapid deployment with long-term maintainability and high performance.%
             \item \textbf{Cross-Functional Integration:} Acts as the technical glue bridging development, QA, and architecture.%

@@ -37,7 +37,7 @@ except ImportError:
 
 
 # ==========================================
-# 1. PYDANTIC SCHEMA
+# 1. PYDANTIC SCHEMA & CLEANING
 # ==========================================
 class JobMetadata(BaseModel):
     company_name: str = Field(description="Name des ausschreibenden Unternehmens")
@@ -91,6 +91,28 @@ class JobMetadata(BaseModel):
     )
 
 
+def clean_job_title(title: str) -> str:
+    if not title:
+        return ""
+    patterns = [
+        r"\s*\(all genders?\)",
+        r"\s*\(f/m/d\)",
+        r"\s*\(m/f/d\)",
+        r"\s*\(m/w/d\)",
+        r"\s*\(w/m/d\)",
+        r"\s*\(gn\)",
+        r"\s*\(m/w/x\)",
+        r"\s*-\s*f/m/d",
+        r"\s*-\s*m/f/d",
+        r"\s*-\s*m/w/d",
+        r"\s*-\s*w/m/d",
+    ]
+    cleaned = title
+    for p in patterns:
+        cleaned = re.sub(p, "", cleaned, flags=re.IGNORECASE)
+    return cleaned.strip()
+
+
 # ==========================================
 # 2. CRAWLER / TEXT-EXTRACTOR
 # ==========================================
@@ -132,8 +154,7 @@ def analyze_with_ollama(job_text: str) -> JobMetadata:
         "Analysiere die folgende Stellenanzeige. "
         "WICHTIG: Falls im Text ein echter Name eines Ansprechpartners steht, extrahiere diesen bei 'contact_person' "
         "und setze eine persönliche Anrede unter 'salutation'. "
-        "Bewerte zudem den fachlichen Fit deines Profils (Schwerpunkt: Senior C++, Python, Cloud, DevOps, Machine Learning, MLOps, Systemarchitektur) "
-        "im Verhältnis zur Stellenanzeige als Prozentwert (z.B. '85%') unter 'fit_score'.\n\n"
+        "Bewerte zudem den fachlichen Fit deines Profils als Prozentwert (z.B. '85%') unter 'fit_score'.\n\n"
         f"Stellenanzeige:\n{job_text}"
     )
     return structured_llm.invoke(prompt)
@@ -153,8 +174,7 @@ def analyze_with_gemini(job_text: str) -> JobMetadata:
         "Analysiere die folgende Stellenanzeige. "
         "WICHTIG: Falls im Text ein echter Name eines Ansprechpartners steht, extrahiere diesen bei 'contact_person' "
         "und setze eine persönliche Anrede unter 'salutation'. "
-        "Bewerte zudem den fachlichen Fit deines Profils (Schwerpunkt: Senior C++, Python, Cloud, DevOps, Machine Learning, MLOps, Systemarchitektur) "
-        "im Verhältnis zur Stellenanzeige als Prozentwert (z.B. '85%') unter 'fit_score'.\n\n"
+        "Bewerte zudem den fachlichen Fit deines Profils als Prozentwert (z.B. '85%') unter 'fit_score'.\n\n"
         f"Stellenanzeige:\n{job_text}"
     )
 
@@ -310,7 +330,7 @@ SETTINGS_TEMPLATE = r"""% ==========================================
 \newcommand{\firmenStrasse}{__LOCATION__}
 \newcommand{\firmenOrt}{__LOCATION__}
 
-% --- INTELLIGENTE ADRESS-AUSGABE (Verhindert doppelte Zeilen, wenn Straße == Ort) ---
+% --- INTELLIGENTE ADRESS-AUSGABE ---
 \newcommand{\firmenAdresse}{%
     \def\tempStrasse{__LOCATION__}%
     \def\tempOrt{__LOCATION__}%
@@ -327,7 +347,7 @@ SETTINGS_TEMPLATE = r"""% ==========================================
 \newcommand{\anrede}{__SALUTATION__}
 \newcommand{\firmenHighlight}{__COMPANY_HIGHLIGHT__}
 
-% --- DYNAMISCHER FLIESSTEXT-BEZUG (Sprachabhängig gesteuert über Python) ---
+% --- DYNAMISCHER FLIESSTEXT-BEZUG ---
 \newcommand{\firmenFlussbezug}{__FIRMEN_FLUSSBEZUG__}
 
 % --- HEADER BEFEHL ---
@@ -351,17 +371,15 @@ SETTINGS_TEMPLATE = r"""% ==========================================
 
 \newcommand{\daterange}[2]{\hfill{\small #1 -- #2}}
 
-% --- ENGINEERING APPROACH & MINDSET DEFINITION (SPRACHABHÄNGIG) ---
+% --- ENGINEERING APPROACH & MINDSET DEFINITION ---
 \newcommand{\engineeringApproach}{%
-    \cvsection{\ifnum\pdfstrcmp{\languagename}{ngerman}=0 Arbeitsweise \& Mindset\else Engineering Approach \& Mindset\fi}%
+    \cvsection{\ifnum\pdfstrcmp{\languagename}{german}=0 Arbeitsweise \& Mindset\else Engineering Approach \& Mindset\fi}%
     \begin{itemize}[leftmargin=*, itemsep=2pt]%
-        \ifnum\pdfstrcmp{\languagename}{ngerman}=0
-            % --- DEUTSCHE VERSION ---
+        \ifnum\pdfstrcmp{\languagename}{german}=0
             \item \textbf{Systematisches Problemlösen:} Analytischer First-Principles-Ansatz für systematisches Debugging und Stabilitätsoptimierung.%
             \item \textbf{Fokus auf Qualität & Effizienz:} Pragmatisches Engineering-Mindset, das schnelles Deployment mit langfristiger Wartbarkeit und hoher Performance verbindet.%
             \item \textbf{Funktionsübergreifende Integration:} Fungiert als technisches Bindeglied zwischen Entwicklung, QA und Architektur.%
         \else
-            % --- ENGLISCHE VERSION ---
             \item \textbf{Systematic Problem Solving:} First-principles analytical approach to systematic debugging and stability optimization.%
             \item \textbf{Quality & Efficiency Focus:} Pragmatic engineering mindset balancing rapid deployment with long-term maintainability and high performance.%
             \item \textbf{Cross-Functional Integration:} Acts as the technical glue bridging development, QA, and architecture.%
@@ -381,7 +399,6 @@ SETTINGS_TEMPLATE = r"""% ==========================================
 
 
 def escape_latex(text: str) -> str:
-    """Maskiert LaTeX-Sonderzeichen in Dynamik-Strings."""
     if not text:
         return ""
     chars = {
@@ -404,28 +421,40 @@ def escape_latex(text: str) -> str:
 
 
 def render_settings(meta: JobMetadata, lang: str) -> str:
-    babel_lang = (
-        "ngerman" if lang.lower() in ["de", "deutsch", "german"] else "american"
-    )
+    babel_lang = "german" if lang.lower() in ["de", "deutsch", "german"] else "american"
     country = "Österreich" if lang.lower() in ["de", "deutsch", "german"] else "Austria"
 
-    # Externe Sprachsteuerung für das Cover Letter (Ihr Unternehmen vs. Your company)
     flussbezug = (
         r"\textbf{Ihr Unternehmen}~"
         if lang.lower() in ["de", "deutsch", "german"]
         else r"\textbf{Your company}~"
     )
 
-    # Bereinige das Kerning bei Trennzeichen im Subheader
+    def sanitize_field(val: str) -> str:
+        if not val or "<unknown>" in val.lower():
+            return ""
+        return val
+
+    meta.job_title = sanitize_field(meta.job_title)
+    meta.cv_rolle = sanitize_field(meta.cv_rolle) or meta.job_title
+    meta.cv_subheader = sanitize_field(meta.cv_subheader)
+    meta.company_name = sanitize_field(meta.company_name)
+    meta.contact_person = sanitize_field(meta.contact_person)
+    meta.location = sanitize_field(meta.location)
+
+    safe_cv_rolle = escape_latex(meta.cv_rolle)
+    clean_subheader = escape_latex(meta.cv_subheader)
     clean_subheader = re.sub(
-        r"\\cdot|·", r"\\quad\\textperiodcentered\\quad", meta.cv_subheader
+        r"\\textbackslash\{\\}cdot|·",
+        r"\\quad\\textperiodcentered\\quad",
+        clean_subheader,
     )
 
     return (
         SETTINGS_TEMPLATE.replace("__BABEL_LANG__", babel_lang)
         .replace("__COUNTRY__", country)
         .replace("__FIRMEN_FLUSSBEZUG__", flussbezug)
-        .replace("__CV_ROLLE__", escape_latex(meta.cv_rolle))
+        .replace("__CV_ROLLE__", safe_cv_rolle)
         .replace("__CV_SUBHEADER__", clean_subheader)
         .replace("__COMPANY_NAME__", escape_latex(meta.company_name))
         .replace("__CONTACT_PERSON__", escape_latex(meta.contact_person))
@@ -471,7 +500,6 @@ def resolve_file_variants(meta: JobMetadata, lang_setting: str) -> tuple[str, st
 # 5. CLEANUP HELPER
 # ==========================================
 def cleanup_target_dir(target_dir: Path):
-    """Löscht alle temporären Dateien aus dem Zielverzeichnis, behält nur .pdf und .log."""
     for temp_file in target_dir.glob("*"):
         if temp_file.is_file():
             if temp_file.suffix.lower() not in [".pdf", ".log"]:
@@ -547,12 +575,20 @@ def run_pipeline(
     cascade_order: List[str],
     lang_setting: str = "auto",
     dry_run: bool = False,
+    overrides: Optional[List[str]] = None,
 ):
     if os.path.exists(source):
         print(f"[*] Reading job description from file: {source}")
         job_text = Path(source).read_text(encoding="utf-8")
     else:
         job_text = extract_text_from_url(source)
+
+    max_chars = 15000
+    if len(job_text) > max_chars:
+        print(
+            f"[!] Hinweis: Text ist {len(job_text)} Zeichen lang. Kürze exakt auf die ersten {max_chars} Zeichen..."
+        )
+        job_text = job_text[:max_chars]
 
     meta = None
     used_model = None
@@ -585,28 +621,42 @@ def run_pipeline(
     if not meta:
         raise RuntimeError("[X] Alle Provider in der Kaskade sind fehlgeschlagen!")
 
+    if overrides:
+        for item in overrides:
+            if "=" in item:
+                key, val = item.split("=", 1)
+                key = key.strip()
+                val = val.strip()
+                if hasattr(meta, key):
+                    old_val = getattr(meta, key)
+                    setattr(meta, key, val)
+                    print(f"[*] Generischer Override [{key}]: '{old_val}' -> '{val}'")
+                else:
+                    print(
+                        f"[!] Warnung: Feld '{key}' existiert nicht im JobMetadata-Schema."
+                    )
+
+    meta.job_title = clean_job_title(meta.job_title)
+    meta.cv_rolle = clean_job_title(meta.cv_rolle)
+
     resolved_lang, cv_file, cl_file = resolve_file_variants(meta, lang_setting)
 
-    print("\n--- EXTRAHIERTE METADATEN ---")
+    print("\n--- EXTRAHIERTE & ANGEPASSTE METADATEN ---")
     print(meta.model_dump_json(indent=2))
 
     if dry_run:
         print("[*] Dry-run Modus aktiv. Keine Dateien geschrieben.")
         return
 
-    # settings.tex schreiben
     settings_content = render_settings(meta, resolved_lang)
     Path("settings.tex").write_text(settings_content, encoding="utf-8")
     print("[✓] settings.tex erfolgreich generiert.")
 
-    # CSV Loggen
     append_to_csv(meta, source, used_model, resolved_lang)
 
-    # LaTeX Kompilieren mit Force-Flag (-f) für CV und Anschreiben GETRENNT
     target_dir = Path("output") / sanitize_name(meta.company_name)
     target_dir.mkdir(parents=True, exist_ok=True)
 
-    # 1. CV kompilieren
     try:
         cv_cmd = [
             "latexmk",
@@ -621,7 +671,6 @@ def run_pipeline(
     except subprocess.CalledProcessError as e:
         print(f"[!] Fehler beim Kompilieren des CV ({cv_file}): {e}")
 
-    # 2. Anschreiben separat kompilieren
     try:
         cl_cmd = [
             "latexmk",
@@ -636,7 +685,6 @@ def run_pipeline(
     except subprocess.CalledProcessError as e:
         print(f"[!] Fehler beim Kompilieren des Anschreibens ({cl_file}): {e}")
 
-    # Bereinigungs-Schritt: Nur .pdf und .log im Ausgabeordner behalten
     cleanup_target_dir(target_dir)
     print(f"[✓] PDFs und Log-Dateien erfolgreich verarbeitet unter: {target_dir}")
 
@@ -660,6 +708,11 @@ if __name__ == "__main__":
         nargs="+",
         default=DEFAULT_CASCADE_ORDER,
         help="Reihenfolge der Kaskade (z.B. gemini aws ollama)",
+    )
+    parser.add_argument(
+        "--set",
+        nargs="+",
+        help='Generische Overrides im Format feld=wert (z.B. --set company_name="Familienland GmbH" location="Wien")',
     )
     parser.add_argument(
         "--dry-run",
@@ -698,7 +751,6 @@ if __name__ == "__main__":
         target_dir = Path("output") / "Lokale_Rollen_Laeufe"
         target_dir.mkdir(parents=True, exist_ok=True)
 
-        # Schleife über alle Sprachen ('de' und 'en') und Varianten
         languages_to_run = ["de", "en"] if args.lang == "auto" else [args.lang]
 
         for current_lang in languages_to_run:
@@ -738,7 +790,6 @@ if __name__ == "__main__":
                     f"\n[*] Generiere lokalen Lauf [{current_lang.upper()}] für: {v['rolle']}"
                 )
 
-                # settings.tex schreiben
                 settings_content = render_settings(meta, resolved_lang)
                 Path("settings.tex").write_text(settings_content, encoding="utf-8")
 
@@ -748,7 +799,6 @@ if __name__ == "__main__":
                 )
                 sub_dir.mkdir(parents=True, exist_ok=True)
 
-                # 1. CV kompilieren
                 if Path(cv_file).exists():
                     try:
                         cv_cmd = [
@@ -764,10 +814,7 @@ if __name__ == "__main__":
                         print(f"[✓] Erfolgreich: {cv_file} -> {sub_dir}")
                     except subprocess.CalledProcessError as e:
                         print(f"[!] Fehler beim Kompilieren von {cv_file}: {e}")
-                else:
-                    print(f"[!] Datei {cv_file} nicht gefunden, überspringe...")
 
-                # 2. Anschreiben kompilieren
                 if Path(cl_file).exists():
                     try:
                         cl_cmd = [
@@ -784,7 +831,6 @@ if __name__ == "__main__":
                     except subprocess.CalledProcessError as e:
                         print(f"[!] Fehler beim Kompilieren von {cl_file}: {e}")
 
-                # Bereinigung: Nur .pdf und .log behalten
                 cleanup_target_dir(sub_dir)
 
         print(
@@ -801,4 +847,5 @@ if __name__ == "__main__":
         cascade_order=order,
         lang_setting=args.lang,
         dry_run=args.dry_run,
+        overrides=args.set,
     )

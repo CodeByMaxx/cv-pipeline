@@ -85,6 +85,11 @@ class JobMetadata(BaseModel):
         description="Ein sehr kurzer, prägnanter Fokus auf Deutsch oder Englisch (MAXIMAL 3-6 Wörter, z.B. 'der modernen Cloud-Architektur und KI-Integration' oder 'your focus on automated cloud platforms'). KEINE ganzen Sätze, KEINE Nennung des Firmennamens!"
     )
 
+    fit_score: str = Field(
+        default="85%",
+        description="Einschätzung des prozentualen Fits (Übereinstimmung deines Profils mit den Anforderungen der Stelle, z.B. '90%').",
+    )
+
 
 # ==========================================
 # 2. CRAWLER / TEXT-EXTRACTOR
@@ -125,9 +130,10 @@ def analyze_with_ollama(job_text: str) -> JobMetadata:
 
     prompt = (
         "Analysiere die folgende Stellenanzeige. "
-        "WICHTIG: Falls im Text ein echter Name eines Ansprechpartners (Recruiter, HR Manager, Hiring Manager) steht, extrahiere diesen bei 'contact_person' "
-        "und setze eine persönliche Anrede unter 'salutation' (z.B. 'Sehr geehrte Frau X,' oder 'Dear Mr. Y,'). "
-        "Falls absolut kein Name genannt wird, verwende 'Recruiting Team' und 'Sehr geehrte Damen und Herren,' (bzw. 'Dear Recruiting Team,').\n\n"
+        "WICHTIG: Falls im Text ein echter Name eines Ansprechpartners steht, extrahiere diesen bei 'contact_person' "
+        "und setze eine persönliche Anrede unter 'salutation'. "
+        "Bewerte zudem den fachlichen Fit deines Profils (Schwerpunkt: Senior C++, Python, Cloud, DevOps, Machine Learning, MLOps, Systemarchitektur) "
+        "im Verhältnis zur Stellenanzeige als Prozentwert (z.B. '85%') unter 'fit_score'.\n\n"
         f"Stellenanzeige:\n{job_text}"
     )
     return structured_llm.invoke(prompt)
@@ -145,9 +151,10 @@ def analyze_with_gemini(job_text: str) -> JobMetadata:
 
     prompt = (
         "Analysiere die folgende Stellenanzeige. "
-        "WICHTIG: Falls im Text ein echter Name eines Ansprechpartners (Recruiter, HR Manager, Hiring Manager) steht, extrahiere diesen bei 'contact_person' "
-        "und setze eine persönliche Anrede unter 'salutation' (z.B. 'Sehr geehrte Frau X,' oder 'Dear Mr. Y,'). "
-        "Falls absolut kein Name genannt wird, verwende 'Recruiting Team' und 'Sehr geehrte Damen und Herren,' (bzw. 'Dear Recruiting Team,').\n\n"
+        "WICHTIG: Falls im Text ein echter Name eines Ansprechpartners steht, extrahiere diesen bei 'contact_person' "
+        "und setze eine persönliche Anrede unter 'salutation'. "
+        "Bewerte zudem den fachlichen Fit deines Profils (Schwerpunkt: Senior C++, Python, Cloud, DevOps, Machine Learning, MLOps, Systemarchitektur) "
+        "im Verhältnis zur Stellenanzeige als Prozentwert (z.B. '85%') unter 'fit_score'.\n\n"
         f"Stellenanzeige:\n{job_text}"
     )
 
@@ -204,7 +211,7 @@ def analyze_with_azure(job_text: str) -> JobMetadata:
         messages=[
             {
                 "role": "system",
-                "content": "Analysiere die Stellenanzeige und extrahiere Metadaten. Achte darauf, echte Namen von Ansprechpartnern zu bevorzugen und 'Recruiting Team' nur zu nutzen, wenn kein Name vorhanden ist.",
+                "content": "Analysiere die Stellenanzeige, extrahiere Metadaten und bestimme den Fit als Prozentwert.",
             },
             {"role": "user", "content": job_text},
         ],
@@ -226,8 +233,7 @@ def analyze_with_aws(job_text: str) -> JobMetadata:
 
     bedrock = boto3.client(service_name="bedrock-runtime", region_name=aws_region)
     prompt = (
-        "Analysiere die folgende Stellenanzeige. Extrahiere echte Ansprechpartner und passende Anreden, "
-        "vermeide 'Recruiting Team' falls eine konkrete Person genannt wird.\n\n"
+        "Analysiere die folgende Stellenanzeige. Extrahiere Metadaten und bestimme den passenden Fit-Prozentwert.\n\n"
         f"{job_text}"
     )
 
@@ -489,6 +495,8 @@ CSV_HEADERS = [
     "Role",
     "Grund Absage",
     "Hauptsitz",
+    "Sprache",
+    "Fit",
 ]
 
 
@@ -509,6 +517,8 @@ def append_to_csv(meta: JobMetadata, source: str, used_model: str, resolved_lang
         "Role": meta.job_title,
         "Grund Absage": "",
         "Hauptsitz": meta.location,
+        "Sprache": "Deutsch" if resolved_lang == "de" else "Englisch",
+        "Fit": meta.fit_score,
     }
 
     with open(CSV_FILE, mode="a", newline="", encoding="utf-8") as f:
@@ -516,7 +526,9 @@ def append_to_csv(meta: JobMetadata, source: str, used_model: str, resolved_lang
         if not file_exists:
             writer.writeheader()
         writer.writerow(row)
-    print(f"[✓] Application logged to {CSV_FILE} (Model: {used_model})")
+    print(
+        f"[✓] Application logged to {CSV_FILE} (Model: {used_model}, Fit: {meta.fit_score})"
+    )
 
 
 def sanitize_name(name: str) -> str:
@@ -715,6 +727,7 @@ if __name__ == "__main__":
                     cv_subheader=v["subheader"],
                     salutation=salutation,
                     company_highlight=highlight,
+                    fit_score="85%",
                 )
 
                 resolved_lang, cv_file, cl_file = resolve_file_variants(

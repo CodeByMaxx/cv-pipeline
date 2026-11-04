@@ -100,12 +100,14 @@ def clean_job_title(title: str) -> str:
         r"\s*\(m/f/d\)",
         r"\s*\(m/w/d\)",
         r"\s*\(w/m/d\)",
-        r"\s*\(gn\)",
+        r"\s*\(f/m/x\)",
         r"\s*\(m/w/x\)",
+        r"\s*\(gn\)",
         r"\s*-\s*f/m/d",
         r"\s*-\s*m/f/d",
         r"\s*-\s*m/w/d",
         r"\s*-\s*w/m/d",
+        r"\s*-\s*f/m/x",
     ]
     cleaned = title
     for p in patterns:
@@ -354,8 +356,8 @@ SETTINGS_TEMPLATE = r"""% ==========================================
 \newcommand{\cvHeader}{%
 \begin{center}
     {\Huge\bfseries\color{primary} \meinName}\\[0.1cm]
-    {\LARGE\bfseries \cvRolle}\\[0.05cm]
-    {\color{primary}\textbf{\cvSubheader}}\\[0.1cm]
+    {\large\bfseries \cvRolle}\\[0.05cm]
+    {\small\textsl{\cvSubheader}}\\[0.1cm]
     {\small \meinOrt, __COUNTRY__ \quad\textperiodcentered\quad \meineTel \quad\textperiodcentered\quad \href{mailto:\meineEmail}{\meineEmail} \quad\textperiodcentered\quad \href{\meinLinkedin}{LinkedIn} \quad\textperiodcentered\quad \href{\meinGithub}{GitHub}}
 \end{center}
 \vspace{0.1cm}
@@ -637,7 +639,8 @@ def run_pipeline(
                     )
 
     meta.job_title = clean_job_title(meta.job_title)
-    meta.cv_rolle = clean_job_title(meta.cv_rolle)
+    meta.cv_rolle = clean_job_title(meta.cv_rolle.replace("\n", " "))
+    meta.cv_subheader = clean_job_title(meta.cv_subheader.replace("\n", " "))
 
     resolved_lang, cv_file, cl_file = resolve_file_variants(meta, lang_setting)
 

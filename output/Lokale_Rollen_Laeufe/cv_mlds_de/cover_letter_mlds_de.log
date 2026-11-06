@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.27)  2 NOV 2026 19:20
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.10.27)  6 NOV 2026 13:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -42,8 +42,8 @@ Package: babel 2024/01/07 v24.1 The Babel package
 \bbl@dirlevel=\count196
 
 
-! Package babel Error: Unknown option 'ngerman'. Either you misspelled it
-(babel)                or the language definition file ngerman.ldf
+! Package babel Error: Unknown option 'german'. Either you misspelled it
+(babel)                or the language definition file german.ldf
 (babel)                was not found.
 (babel)                There is a locale ini file for this language.
 (babel)                If it’s the main language, try adding `provide=*'
@@ -319,7 +319,7 @@ File: microtype.cfg 2023/03/13 v3.1a microtype main configuration file (RS)
 (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 111.
+Package hyperref Info: Option `colorlinks' set `true' on input line 109.
 )
 LaTeX Font Info:    Trying to load font information for T1+bch on input line 9.
 
@@ -499,18 +499,6 @@ Underfull \hbox (badness 1622) in paragraph at lines 61--62
 re) bringe ich die technische Tiefe mit,
  []
 
-! Misplaced alignment tab character &.
-<argument> Warum mein Profil zu Ihrer AI- &
-                                            Data-Engineering-Rolle passt:
-l.63 ...Ihrer AI- & Data-Engineering-Rolle passt:}
-                                                  
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
 LaTeX Font Info:    Trying to load font information for TS1+bch on input line 6
 6.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1bch.fd
@@ -529,7 +517,7 @@ Package rerunfilecheck Info: File `cover_letter_mlds_de.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  13037 strings out of 476182
- 207936 string characters out of 5795594
+ 207930 string characters out of 5795594
  1932975 words of memory out of 5000000
  34813 multiletter control sequences out of 15000+600000
  585375 words of font info for 102 fonts, out of 8000000 for 9000
@@ -540,7 +528,7 @@ share/texlive/texmf-dist/fonts/type1/bitstrea/charter/bchr8a.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/bitstrea/charter/bchri8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb>
 Output written on output/Lokale_Rollen_Laeufe/cv_mlds_de/cover_letter_mlds_de.p
-df (1 page, 58012 bytes).
+df (1 page, 58016 bytes).
 PDF statistics:
  37 PDF objects out of 1000 (max. 8388607)
  25 compressed objects within 1 object stream
